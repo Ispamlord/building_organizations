@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace building_organizations
+namespace building_organizations.EntityForms
 {
-    public partial class CityForm : Form
+    public partial class Brigade : Form
     {
-        public CityForm()
+        public Brigade()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

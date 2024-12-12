@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace building_organizations.TestForms
+namespace building_organizations.SettingForms
 {
-    public partial class AddForms : Form
+    public partial class ChangeForms : Form
     {
-        public AddForms()
+        public ChangeForms()
         {
             InitializeComponent();
         }

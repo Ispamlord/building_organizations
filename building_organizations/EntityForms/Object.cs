@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace building_organizations.TestForms
+namespace building_organizations.EntityForms
 {
-    public partial class EditForms : Form
+    public partial class Object : Form
     {
-        public EditForms()
+        public Object()
         {
             InitializeComponent();
         }

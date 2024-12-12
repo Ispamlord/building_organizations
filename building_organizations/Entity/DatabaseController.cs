@@ -15,15 +15,14 @@ namespace building_organizations.Entity
         private string sqlCon = "Server=localhost;Port=5432;Database=building_constraction;User id = postgres; Password=1234;";
         private NpgsqlConnection sqlConnection;
         private NpgsqlCommand command;
-        NpgsqlDataReader reader;
+        private NpgsqlDataReader reader;
         public DatabaseController() {
             sqlConnection = new NpgsqlConnection(sqlCon);
             sqlConnection.Open();
             command = new NpgsqlCommand();
+            command.Connection = sqlConnection;
         }
-        public void SetRole(string role) { 
-            
-        }
+       
         public void CreateUser(string username, string password, string role)
         {
 
@@ -40,8 +39,6 @@ namespace building_organizations.Entity
 
             command.ExecuteNonQuery();  
         }
-
-        
         public bool AuthenticateUser(string username, string password,user us)
         {
             
@@ -87,13 +84,12 @@ namespace building_organizations.Entity
                 }
             }
         }
-        public void SelectFromDataBase(string select, DataGridView d)
+        public void SelectRawFromDataBase(string select, DataGridView d)
         {
             
-            command.Connection = sqlConnection;
             command.CommandType = CommandType.Text;
 
-            command.CommandText = "Set ROLE manager;" + "Update bank Set name= 'bank'Where id =1";
+            command.CommandText =  "SELECT*FROM" + select + ";";
             reader = command.ExecuteReader();
             if (reader.HasRows)
             {
@@ -101,6 +97,21 @@ namespace building_organizations.Entity
                 dt.Load(reader);
                 d.DataSource = dt;
             }
+            command.Dispose();
+        }
+        public void Add_to_DataBase(string select, object[] arg, string[] table_arg)
+        {
+            command.CommandType = CommandType.Text;
+            string zapros = "INSERT INTO " + select + " (";
+            zapros += string.Join(", ", table_arg) + ") VALUES (";
+            zapros += string.Join((", "), table_arg.Select((col, index) => $"@param{index}")) + ");";
+            for (int i = 0; i < arg.Length; i++)
+            {
+                command.Parameters.AddWithValue($"@param{i}", arg[i]);
+            }
+
+            command.CommandText = zapros;
+            command.ExecuteReader();
             command.Dispose();
         }
         public void UpdatetFromDataBase(string o, string[] arg)
@@ -119,6 +130,22 @@ namespace building_organizations.Entity
             
             command.Dispose();
             sqlConnection.Close();
+        }
+        public void SelectWithoutId(string select, string[] arg) {
+            command.CommandType = CommandType.Text;
+            string sql = "SELECT ";
+            for (int i = 0; i < arg.GetLength(0); i++) {
+                sql += string.Join(", ", arg) ;
+            }
+            //+ "FROM" + select + ";";
+            reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                d.DataSource = dt;
+            }
+            command.Dispose();
         }
 
     }

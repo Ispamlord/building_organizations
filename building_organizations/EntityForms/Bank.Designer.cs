@@ -1,6 +1,6 @@
-﻿namespace building_organizations.TestForms
+﻿namespace building_organizations.EntityForms
 {
-    partial class AddForms
+    partial class Bank
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AddForms";
+            this.Text = "Bank";
         }
 
         #endregion

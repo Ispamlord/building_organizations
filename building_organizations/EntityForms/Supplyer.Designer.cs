@@ -1,6 +1,6 @@
-﻿namespace building_organizations
+﻿namespace building_organizations.EntityForms
 {
-    partial class QueryToolWindow
+    partial class Supplyer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,16 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // QueryToolWindow
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "QueryToolWindow";
-            Text = "QueryToolWindow";
-            ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "Supplyer";
         }
 
         #endregion

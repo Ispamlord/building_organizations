@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace building_organizations.TestForms
+namespace building_organizations.EntityForms
 {
-    public partial class DeleteForms : Form
+    public partial class Supplyer : Form
     {
-        public DeleteForms()
+        public Supplyer()
         {
             InitializeComponent();
         }

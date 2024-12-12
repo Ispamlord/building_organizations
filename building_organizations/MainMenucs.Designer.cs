@@ -33,6 +33,7 @@
             changeRoleToolStripMenuItem = new ToolStripMenuItem();
             настройкаToolStripMenuItem = new ToolStripMenuItem();
             поменятьЯзыкToolStripMenuItem = new ToolStripMenuItem();
+            сменитьПарольToolStripMenuItem = new ToolStripMenuItem();
             PeopleToolStripMenuItem = new ToolStripMenuItem();
             DocumentToolStripMenuItem = new ToolStripMenuItem();
             объектыToolStripMenuItem = new ToolStripMenuItem();
@@ -45,7 +46,9 @@
             AProgrammToolStripMenuItem = new ToolStripMenuItem();
             SoderzhanieToolStripMenuItem = new ToolStripMenuItem();
             dataGridView1 = new DataGridView();
-            сменитьПарольToolStripMenuItem = new ToolStripMenuItem();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -70,7 +73,7 @@
             // changeRoleToolStripMenuItem
             // 
             changeRoleToolStripMenuItem.Name = "changeRoleToolStripMenuItem";
-            changeRoleToolStripMenuItem.Size = new Size(224, 26);
+            changeRoleToolStripMenuItem.Size = new Size(207, 26);
             changeRoleToolStripMenuItem.Text = "Сменить роль";
             changeRoleToolStripMenuItem.Click += changeRoleToolStripMenuItem_Click;
             // 
@@ -78,14 +81,20 @@
             // 
             настройкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { поменятьЯзыкToolStripMenuItem });
             настройкаToolStripMenuItem.Name = "настройкаToolStripMenuItem";
-            настройкаToolStripMenuItem.Size = new Size(224, 26);
+            настройкаToolStripMenuItem.Size = new Size(207, 26);
             настройкаToolStripMenuItem.Text = "Настройка";
             // 
             // поменятьЯзыкToolStripMenuItem
             // 
             поменятьЯзыкToolStripMenuItem.Name = "поменятьЯзыкToolStripMenuItem";
-            поменятьЯзыкToolStripMenuItem.Size = new Size(224, 26);
+            поменятьЯзыкToolStripMenuItem.Size = new Size(199, 26);
             поменятьЯзыкToolStripMenuItem.Text = "Поменять язык";
+            // 
+            // сменитьПарольToolStripMenuItem
+            // 
+            сменитьПарольToolStripMenuItem.Name = "сменитьПарольToolStripMenuItem";
+            сменитьПарольToolStripMenuItem.Size = new Size(207, 26);
+            сменитьПарольToolStripMenuItem.Text = "Сменить пароль";
             // 
             // PeopleToolStripMenuItem
             // 
@@ -148,36 +157,61 @@
             // AProgrammToolStripMenuItem
             // 
             AProgrammToolStripMenuItem.Name = "AProgrammToolStripMenuItem";
-            AProgrammToolStripMenuItem.Size = new Size(224, 26);
+            AProgrammToolStripMenuItem.Size = new Size(187, 26);
             AProgrammToolStripMenuItem.Text = "О программе";
             // 
             // SoderzhanieToolStripMenuItem
             // 
             SoderzhanieToolStripMenuItem.Name = "SoderzhanieToolStripMenuItem";
-            SoderzhanieToolStripMenuItem.Size = new Size(224, 26);
+            SoderzhanieToolStripMenuItem.Size = new Size(187, 26);
             SoderzhanieToolStripMenuItem.Text = "Содержание";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 43);
+            dataGridView1.Location = new Point(0, 61);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(600, 230);
+            dataGridView1.Size = new Size(644, 312);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // сменитьПарольToolStripMenuItem
+            // button1
             // 
-            сменитьПарольToolStripMenuItem.Name = "сменитьПарольToolStripMenuItem";
-            сменитьПарольToolStripMenuItem.Size = new Size(224, 26);
-            сменитьПарольToolStripMenuItem.Text = "Сменить пароль";
+            button1.Location = new Point(650, 122);
+            button1.Name = "button1";
+            button1.Size = new Size(138, 59);
+            button1.TabIndex = 2;
+            button1.Text = "Добавить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(650, 202);
+            button2.Name = "button2";
+            button2.Size = new Size(138, 59);
+            button2.TabIndex = 3;
+            button2.Text = "Удалить";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(650, 286);
+            button3.Name = "button3";
+            button3.Size = new Size(138, 59);
+            button3.TabIndex = 4;
+            button3.Text = "Изменить";
+            button3.UseVisualStyleBackColor = true;
             // 
             // MainMenucs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 386);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -210,5 +244,8 @@
         private ToolStripMenuItem поменятьЯзыкToolStripMenuItem;
         private DataGridView dataGridView1;
         private ToolStripMenuItem сменитьПарольToolStripMenuItem;
+        private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }
