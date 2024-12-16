@@ -10,26 +10,11 @@ using System.Windows.Forms;
 
 namespace building_organizations.EntityForms
 {
-    public partial class Object : Form
+    public partial class Request : Form
     {
-        public Object()
+        public Request()
         {
             InitializeComponent();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -32,7 +32,7 @@ namespace building_organizations
             {
                 MainMenucs mainMenucs = new MainMenucs(user);
                 mainMenucs.Show();
-                MessageBox.Show("Поздравляю вы вошли в с уровнем доступа:" + user.role);
+                MessageBox.Show("Поздравляю вы вошли в с уровнем доступа: " + user.role);
                 this.Hide();
             }
             else

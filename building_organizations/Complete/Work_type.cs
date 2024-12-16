@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace building_organizations.EntityForms
 {
-    public partial class Bank : Form
+    public partial class Work_type : Form
     {
-        public Bank()
+        public Work_type()
         {
             InitializeComponent();
         }

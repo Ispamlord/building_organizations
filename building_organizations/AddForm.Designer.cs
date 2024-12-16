@@ -1,6 +1,6 @@
-﻿namespace building_organizations.EntityForms
+﻿namespace building_organizations
 {
-    partial class Worker
+    partial class AddForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Рабочие";
+            this.Text = "AddForm";
         }
 
         #endregion

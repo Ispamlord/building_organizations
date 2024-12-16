@@ -1,4 +1,5 @@
-﻿using System;
+﻿using building_organizations.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,27 @@ namespace building_organizations.SettingForms
 {
     public partial class ChangeForms : Form
     {
-        public ChangeForms()
+        DatabaseController databaseController;
+        user us;
+        public ChangeForms(user us)
         {
+            this.us = us;
             InitializeComponent();
+            databaseController = new DatabaseController();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            
+            if (us.password == textBox1.Text)
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Пароль неверный");
+            }
         }
     }
 }

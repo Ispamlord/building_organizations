@@ -1,5 +1,4 @@
 ﻿using building_organizations.Entity;
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,24 +11,26 @@ using System.Windows.Forms;
 
 namespace building_organizations.EntityForms
 {
-    public partial class StreetForm : Form
+    public partial class building_material : Form
     {
-
         DatabaseController database = new DatabaseController();
-        public StreetForm()
+        public building_material()
         {
             InitializeComponent();
-            database.SelectRawFromDataBase("street", dataGridView1);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            database.SelectRawFromDataBase("street", dataGridView1);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            string[] table = { label1.Text, label2.Text , label3.Text, label5.Text};
+            string[] join = { "unit_of_measurement" };
+            string[] id = { "unit_id" };
+            string[] columns = { "name" };
+            database.SelectWithoutId("building_materials", table, join, id, dataGridView1, columns);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -37,8 +38,10 @@ namespace building_organizations.EntityForms
             try
             {
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
-                string[] columns = { label1.Text, label2.Text };
-                database.Add_to_DataBase("street", values, columns);
+                string[] columns = { label1.Text, label2.Text }; ;
+                //database.AddWithReferences()
+                database.Add_to_DataBase("building_materials", values, columns);
+
                 MessageBox.Show("Record added successfully.");
             }
             catch (Exception ex)
@@ -47,18 +50,24 @@ namespace building_organizations.EntityForms
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string[] strings = { label2.Text };
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("street", strings, textBox1.Text, ob);
+                database.UpdatetFromDataBase("building_materials", strings, textBox1.Text, ob);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show($"Invalid city: {ex.Message}");
+                MessageBox.Show("Invalid building_materials: ");
             }
+
         }
     }
 }

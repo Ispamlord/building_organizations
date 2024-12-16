@@ -119,7 +119,7 @@
             Controls.Add(textBox1);
             Controls.Add(button1);
             Name = "RegistrateForm";
-            Text = "RegistrateForm";
+            Text = "Регистрация";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -28,12 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ChangeForms";
+            textBox1 = new TextBox();
+            label1 = new Label();
+            button1 = new Button();
+            textBox2 = new TextBox();
+            label2 = new Label();
+            SuspendLayout();
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(-2, 108);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(177, 27);
+            textBox1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(-2, 85);
+            label1.Name = "label1";
+            label1.Size = new Size(174, 20);
+            label1.TabIndex = 1;
+            label1.Text = "Введите старый пароль";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(-2, 194);
+            button1.Name = "button1";
+            button1.Size = new Size(177, 81);
+            button1.TabIndex = 2;
+            button1.Text = "Подтвердить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(-2, 161);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(177, 27);
+            textBox2.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(-2, 138);
+            label2.Name = "label2";
+            label2.Size = new Size(170, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Введите новый пароль";
+            // 
+            // ChangeForms
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(185, 278);
+            Controls.Add(label2);
+            Controls.Add(textBox2);
+            Controls.Add(button1);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
+            Name = "ChangeForms";
+            Text = "ChangeForms";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox textBox1;
+        private Label label1;
+        private Button button1;
+        private TextBox textBox2;
+        private Label label2;
     }
 }

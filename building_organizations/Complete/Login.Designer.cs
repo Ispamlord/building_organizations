@@ -100,7 +100,7 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Name = "Login";
-            Text = "Form1";
+            Text = "Авторитизация";
             ResumeLayout(false);
             PerformLayout();
         }

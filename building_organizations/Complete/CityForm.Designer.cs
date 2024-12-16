@@ -42,6 +42,8 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 24);
             dataGridView1.Name = "dataGridView1";
@@ -55,12 +57,13 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(216, 339);
+            textBox2.Location = new Point(300, 339);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
+            textBox2.Size = new Size(134, 27);
             textBox2.TabIndex = 2;
             // 
             // button1
@@ -71,6 +74,7 @@
             button1.TabIndex = 3;
             button1.Text = "Изменить";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -78,7 +82,7 @@
             button2.Name = "button2";
             button2.Size = new Size(175, 46);
             button2.TabIndex = 4;
-            button2.Text = "Найти";
+            button2.Text = "Обновить";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -94,11 +98,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(162, 342);
+            label2.Location = new Point(216, 342);
             label2.Name = "label2";
-            label2.Size = new Size(46, 20);
+            label2.Size = new Size(75, 20);
             label2.TabIndex = 6;
-            label2.Text = "name";
+            label2.Text = "city_name";
             // 
             // button3
             // 
@@ -134,7 +138,7 @@
             Controls.Add(textBox1);
             Controls.Add(dataGridView1);
             Name = "CityForm";
-            Text = "CityForm";
+            Text = "Города";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

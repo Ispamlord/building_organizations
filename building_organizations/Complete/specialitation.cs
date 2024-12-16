@@ -1,5 +1,4 @@
 ﻿using building_organizations.Entity;
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,24 +11,13 @@ using System.Windows.Forms;
 
 namespace building_organizations.EntityForms
 {
-    public partial class StreetForm : Form
+    public partial class specialitation : Form
     {
-
         DatabaseController database = new DatabaseController();
-        public StreetForm()
+        public specialitation()
         {
             InitializeComponent();
-            database.SelectRawFromDataBase("street", dataGridView1);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            database.SelectRawFromDataBase("street", dataGridView1);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            database.SelectRawFromDataBase("specialization", dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -38,7 +26,9 @@ namespace building_organizations.EntityForms
             {
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
                 string[] columns = { label1.Text, label2.Text };
-                database.Add_to_DataBase("street", values, columns);
+
+                database.Add_to_DataBase("specialization", values, columns);
+
                 MessageBox.Show("Record added successfully.");
             }
             catch (Exception ex)
@@ -53,12 +43,17 @@ namespace building_organizations.EntityForms
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("street", strings, textBox1.Text, ob);
+                database.UpdatetFromDataBase("specialization", strings, textBox1.Text, ob);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show($"Invalid city: {ex.Message}");
+                MessageBox.Show("Invalid specialization: ");
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            database.SelectRawFromDataBase("specialization", dataGridView1);
         }
     }
 }
