@@ -30,7 +30,7 @@ namespace building_organizations.EntityForms
             string[] join = { "unit_of_measurement" };
             string[] id = { "unit_id" };
             string[] columns = { "name" };
-            database.SelectWithoutId("building_materials", table, join, id, dataGridView1, columns);
+           // database.SelectWithoutId("building_materials", table, join, id, dataGridView1, columns);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace building_organizations.EntityForms
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
                 string[] columns = { label1.Text, label2.Text }; ;
                 //database.AddWithReferences()
-                database.Add_to_DataBase("building_materials", values, columns);
+                //database.Add_to_DataBase("building_materials", values, columns);
 
                 MessageBox.Show("Record added successfully.");
             }
@@ -61,7 +61,7 @@ namespace building_organizations.EntityForms
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("building_materials", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("building_materials", strings, textBox1.Text, ob);
             }
             catch
             {

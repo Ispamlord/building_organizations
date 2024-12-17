@@ -18,7 +18,7 @@ namespace building_organizations.EntityForms
         public Bank()
         {
             InitializeComponent();
-            database.SelectRawFromDataBase("bank", dataGridView1);
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace building_organizations.EntityForms
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
                 string[] columns = { label1.Text, label2.Text };
 
-                database.Add_to_DataBase("bank", values, columns);
+                //database.Add_to_DataBase("bank", values, columns);
 
                 MessageBox.Show("Record added successfully.");
             }
@@ -44,7 +44,7 @@ namespace building_organizations.EntityForms
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("bank", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("bank", strings, textBox1.Text, ob);
             }
             catch
             {
@@ -54,7 +54,7 @@ namespace building_organizations.EntityForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            database.SelectRawFromDataBase("bank", dataGridView1);
+            //database.SelectRawFromDataBase("bank", dataGridView1);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

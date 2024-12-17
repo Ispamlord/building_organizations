@@ -29,6 +29,84 @@ namespace building_organizations.Entity
             sqlConnection.Open();
             jsonContent = File.ReadAllText(jsonFilePath);
         }
+        public void Update(string tablename, string[] update,int id)
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = sqlConnection;
+            command.CommandType = CommandType.Text;
+            dynamic tables = JsonConvert.DeserializeObject(jsonContent);
+            string sql = $"UPDATE {tablename} ";
+            int i = 0;
+            string idparam = "@idparam";
+            string Where =$" WHERE id = {idparam};";
+            command.Parameters.AddWithValue(idparam, id);
+            try {
+                foreach(var table in tables)
+                {
+                    if (table.table_name == tablename) {
+                        var columns = table.columns;
+                        var lastcolum = columns.Last;
+                        foreach (var column in table.columns)
+                        {
+                            
+                            if (column.primary_key != null)
+                            {
+                                continue;
+                            }
+                            if(update[i] == "" || update[i] == " ")
+                            {
+                                i++;
+                                continue;
+                            }
+                            if (column.references != null)
+                            {
+                                var refer = column.references;
+                                string paramname = $"@param{i}";
+                                sql += $"SET {column.column_name} = {paramname} ";
+                                int? ids = FindIdByType(refer.table,  refer.replace_with, update[i]);
+                                if (!ids.HasValue)
+                                {
+                                    MessageBox.Show("No ID found.");
+                                }
+
+                                command.Parameters.AddWithValue(paramname, ids);
+                            }
+                            else
+                            {
+                                string paramname = $"@param{i}";
+                                sql += $"SET {column.column_name} = {paramname}";
+                                object r = ReturnType(column.type,update[i]);
+                                command.Parameters.AddWithValue(paramname, r);
+                            }
+                            if (column != lastcolum)
+                            {
+                                sql += ", ";
+                            }
+                            i++;
+                        }   
+                    }
+                }
+                
+                sql += Where;
+                
+            }
+            catch (Exception ex) { }
+        }
+        public void Delete(string tablename, string column, string data) {
+            string sql = $"DELETE FROM {tablename} WHERE {column} = {data};";
+        }
+        public void Delete(string tablename, int id) {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = sqlConnection;
+            command.CommandType = CommandType.Text;
+            string sql = $"DELETE FROM {tablename} WHERE id = @id;";
+            
+            command.Parameters.AddWithValue("@id", id);
+            command.CommandText = sql;
+            command.ExecuteNonQuery();
+            command.Dispose();
+        }
+        //запись в таблицу
         public string[]? Select(string tablename,DataGridView d)
         {
             NpgsqlCommand command = new NpgsqlCommand();
@@ -52,9 +130,10 @@ namespace building_organizations.Entity
                             if (column.references != null)
                             {
                                 var refer = column.references;
-                                sql += $"{refer.table}.{refer.replace_with}";
+                                sql += $"{refer.table}.{refer.replace_with} AS {column.lname}";
                             } else {
-                                sql += $"{table.table_name}.{column.column_name}";
+                                if (column.primary_key == null) sql += $"{table.table_name}.{column.column_name} AS \"{column.lname}\"";
+                                else sql += $"{table.table_name}.{column.column_name}";
                             }
                             if (column != lastcolum)
                             {
@@ -124,82 +203,94 @@ namespace building_organizations.Entity
         }
         //функция добавления в таблицу
         public void Add(string[] data, string tablename) {
-            
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = sqlConnection;
             command.CommandType = CommandType.Text;
             dynamic tables = JsonConvert.DeserializeObject(jsonContent);
-            string sql = $"INSERT INTO {tablename} ("; 
-            foreach (var table in tables)
+            string sql = $"INSERT INTO {tablename} (";
+            try
             {
-                if (table.table_name == tablename)
+                
+                foreach (var table in tables)
                 {
-                    var columns = table.columns;
-                    var lastcolum = columns.Last;
-                    string minizapros=" ";
-                    foreach (var column in table.columns)
+                    if (table.table_name == tablename)
                     {
-                        minizapros = column.column_name;
-                        if (column != lastcolum) {
-                            minizapros += ", ";
-                        }
-                        sql += minizapros; 
-                    }
-                    sql += ") VALUES (";
-                    int i = 0;
-
-                    foreach (var column in table.columns)
-                    {
-                        if (column.references != null) {
-                            var refer = column.references;
-                            
-                            string paramname = $"@param{i}";
-                            sql += paramname;
-
-                            if (column != lastcolum)
-                            {
-                                sql += ", ";
-                            }
-                            int? id = FindIdByType(refer.table, refer.type, refer.replace_with, data[i]);
-                            if (!id.HasValue)
-                            {
-                                MessageBox.Show("No ID found.");
-                            }
-                            
-                            command.Parameters.AddWithValue(paramname, id);
-                        }
-                        else
+                        var columns = table.columns;
+                        var lastcolum = columns.Last;
+                        string minizapros = " ";
+                        foreach (var column in table.columns)
                         {
-                            string paramname = $"@param{i}";
-                            sql += paramname;
-
+                            minizapros = column.column_name;
                             if (column != lastcolum)
                             {
-                                sql += ", ";
+                                minizapros += ", ";
                             }
-                            object r = ReturnType(column.type, data[i]);
-                            command.Parameters.AddWithValue(paramname, r);
+                            sql += minizapros;
                         }
-                        i++;
+                        sql += ") VALUES (";
+                        int i = 0;
 
+                        foreach (var column in table.columns)
+                        {
+                            if (column.references != null)
+                            {
+                                var refer = column.references;
+
+                                string paramname = $"@param{i}";
+                                sql += paramname;
+
+                                if (column != lastcolum)
+                                {
+                                    sql += ", ";
+                                }
+                                string rtable = refer.table != null ? refer.table.ToString() : "";
+                                string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
+                                int? id = FindIdByType(rtable, Replece, data[i]);
+                                if (!id.HasValue)
+                                {
+                                    MessageBox.Show("No ID found.");
+                                }
+
+                                command.Parameters.AddWithValue(paramname, id);
+                            }
+                            else
+                            {
+                                string paramname = $"@param{i}";
+                                sql += paramname;
+
+                                if (column != lastcolum)
+                                {
+                                    sql += ", ";
+                                }
+                                string columnType = column.type != null ? column.type.ToString() : "";
+                                object r = ReturnType(columnType, data[i]);
+                                command.Parameters.AddWithValue(paramname, r);
+                            }
+                            i++;
+
+                        }
+                        sql += ");";
                     }
-                    sql += ");";
                 }
+
+                command.CommandText = sql;
+                command.ExecuteNonQuery();
+                command.Dispose();
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show($"{ex}");
             }
-            command.CommandText = sql;
-            command.ExecuteNonQuery();
-            command.Dispose();
         }
         //функция для поиска внешнего ключа по типу данных которым заменяется сам внешний ключ
-        public int? FindIdByType(string tablename, string columntype, string columnName, object value)
+        public int? FindIdByType(string tablename, string columnName, object value)
         {
             using (var command1 = new NpgsqlCommand())
             {
                 command1.Connection = sqlConnection;
 
-                command1.CommandText = $"SELECT id FROM {tablename} WHERE type = @type AND {columnName} = @value";
+                command1.CommandText = $"SELECT id FROM {tablename} WHERE {columnName} = @value";
 
-                command1.Parameters.AddWithValue("@type", columntype);
                 command1.Parameters.AddWithValue("@value", value);
 
                 using (var reader = command1.ExecuteReader())
@@ -307,155 +398,7 @@ namespace building_organizations.Entity
                 }
             }
         }
-        public DataTable SelectRawFromDataBase(string select, DataGridView d)
-        {
-            NpgsqlCommand command = new NpgsqlCommand();
-            command.Connection = sqlConnection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "SELECT * FROM " + select + ";";
-
-            DataTable dt = new DataTable();
-            using (var reader = command.ExecuteReader())
-            {
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                    d.DataSource = dt; 
-                }
-            }
-
-            command.Dispose();
-            return dt; 
-        }
-
-        public void Add_to_DataBase(string select, object[] arg, string[] table_arg)
-        {
-
-            string query = $"INSERT INTO {select} ({string.Join(", ", table_arg)}) VALUES ({string.Join(", ", table_arg.Select((_, index) => $"@param{index}"))});";
-
-            using (var command = new NpgsqlCommand(query, sqlConnection))
-            {
-                for (int i = 0; i < arg.Length; i++)
-                {
-                    command.Parameters.AddWithValue($"@param{i}", arg[i] ?? DBNull.Value);
-                }
-
-                using (var reader = command.ExecuteReader())
-                {
-                }
-            }
-        }
-        public void UpdatetFromDataBase(string select, string[] col_arg, string id, object[] arg)
-        {
-            NpgsqlConnection sqlConnection = new NpgsqlConnection(sqlCon);
-            sqlConnection.Open();
-            string sql = $"UPDATE {select} SET ";
-            sql += string.Join(", ", col_arg.Select((col, index) => $"{col} = @param{index}"));
-            sql += " WHERE id =" + id + " ;";
-            using (NpgsqlCommand command = new NpgsqlCommand(sql, sqlConnection))
-            {
-                for (int i = 0; i < arg.Length; i++)
-                {
-                    command.Parameters.AddWithValue($"@param{i}", arg[i] ?? DBNull.Value);
-                }
-
-                command.ExecuteNonQuery();
-            }
-            sqlConnection.Close();
-        }
-        public void AddWithReferences(
-    string tableName,
-    Dictionary<string, object> values,
-    Dictionary<string, (string referenceTable, string referenceColumn)> references)
-        {
-            using (var command = new NpgsqlCommand())
-            {
-                command.Connection = sqlConnection;
-                command.CommandType = CommandType.Text;
-
-                foreach (var reference in references)
-                {
-                    string key = reference.Key; 
-                    string referenceTable = reference.Value.referenceTable; 
-                    string referenceColumn = reference.Value.referenceColumn; 
-
-                    if (values.ContainsKey(key)) 
-                    {
-                        string query = $"SELECT id FROM {referenceTable} WHERE {referenceColumn} = @param_{key}";
-                        command.CommandText = query;
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue($"@param_{key}", values[key]);
-
-                        using (var reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                values[key] = reader.GetInt32(0); 
-                            }
-                            else
-                            {
-                                throw new Exception($"Value '{values[key]}' not found in table '{referenceTable}'.");
-                            }
-                        }
-                    }
-                }
-
-                string columns = string.Join(", ", values.Keys);
-                string parameters = string.Join(", ", values.Keys.Select(k => $"@param_{k}"));
-                string insertQuery = $"INSERT INTO {tableName} ({columns}) VALUES ({parameters})";
-
-                command.CommandText = insertQuery;
-                command.Parameters.Clear();
-
-                foreach (var kvp in values)
-                {
-                    command.Parameters.AddWithValue($"@param_{kvp.Key}", kvp.Value);
-                }
-
-                command.ExecuteNonQuery();
-            }
-        }
-        public void SelectWithoutId(string select, string[] table_arg, string[] join_agr, string[] id_join,DataGridView d, string[] name_join_arg) {
-            NpgsqlCommand command = new NpgsqlCommand();
-            command.Connection = sqlConnection;
-            command.CommandType = CommandType.Text;
-            try
-            {
-                
-                string sql = "SELECT ";
-                sql += string.Join(", ", table_arg);
-                for (int i = 0; i < join_agr.Length; i++)
-                {
-                    sql += ", " + join_agr[i] + "." + name_join_arg[i];
-                }
-                sql += " FROM " + select + " ";
-                for (int i = 0; i < join_agr.Length; i++)
-                {
-                    sql += $"JOIN {join_agr[i]} ON {join_agr[i]}.id = {select}.{id_join[i]} ";
-                }
-                sql += ";";
-                command.CommandText = sql;
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    d.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка выполнения запроса: {ex.Message}");
-            }
-            finally
-            {
-                command.Dispose();
-            }
-        }
-        public void Remove(string id)
-        {
-
-        }
+        
 
     }
 }

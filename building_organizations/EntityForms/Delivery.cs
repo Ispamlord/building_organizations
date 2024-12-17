@@ -27,7 +27,7 @@ namespace building_organizations.EntityForms
                 object[] values = { Convert.ToInt32(textBox1.Text), DateTime.Parse(textBox2.Text) };
                 string[] columns = { label1.Text, label2.Text };
 
-                database.Add_to_DataBase("delivery", values, columns);
+                //database.Add_to_DataBase("delivery", values, columns);
 
                 MessageBox.Show("Record added successfully.");
             }
@@ -43,7 +43,7 @@ namespace building_organizations.EntityForms
             object[] ob = { DateTime.Parse(textBox2.Text) };
             try
             {
-                database.UpdatetFromDataBase("delivery", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("delivery", strings, textBox1.Text, ob);
             }
             catch
             {
@@ -53,7 +53,7 @@ namespace building_organizations.EntityForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            database.SelectRawFromDataBase("delivery", dataGridView1);
+            //database.SelectRawFromDataBase("delivery", dataGridView1);
         }
 
         

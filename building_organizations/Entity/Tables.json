@@ -6,21 +6,23 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
                     "column_name": "object_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Название Объекта"
                 },
                 {
-                    "column_name": "id",
-                    "type": "house_number",
-                    "primary_key": false
+                    "column_name": "house_number",
+                    "type": "integer",
+                    "lname": "Номер дома"
                 },
                 {
                     "column_name": "city_id",
                     "type": "integer",
+                    "lname": "Город",
                     "foreign_key": true,
                     "references": {
                         "table": "city",
@@ -31,6 +33,7 @@
                 {
                     "column_name": "street_id",
                     "type": "integer",
+                    "lname": "Улица",
                     "foreign_key": true,
                     "references": {
                         "table": "street",
@@ -51,11 +54,12 @@
                 {
                     "column_name": "name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Название Бригады"
                 },
                 {
                     "column_name": "brigadir_id",
                     "type": "integer",
+                    "lname": "Бригадир",
                     "foreign_key": true,
                     "references": {
                         "table": "workers",
@@ -76,31 +80,32 @@
                 {
                     "column_name": "last_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Фамилия"
                 },
                 {
                     "column_name": "first_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Имя"
                 },
                 {
                     "column_name": "middle_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Отчество"
                 },
                 {
                     "column_name": "account_number",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Номер аккаунта"
                 },
                 {
                     "column_name": "inn",
                     "type": "integer",
-                    "primary_key": false
+                    "lname": "ИНН"
                 },
                 {
                     "column_name": "bank_id",
                     "type": "integer",
+                    "lname": "Банк",
                     "foreign_key": true,
                     "references": {
                         "table": "bank",
@@ -116,42 +121,43 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
                     "column_name": "last_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Фамилия"
                 },
                 {
                     "column_name": "first_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Имя"
                 },
                 {
                     "column_name": "middle_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Отчество"
                 },
                 {
                     "column_name": "gender",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Пол"
                 },
                 {
                     "column_name": "work_experience",
                     "type": "double",
-                    "primary_key": false
+                    "lname": "Опыт работы"
                 },
                 {
                     "column_name": "birth_date",
                     "type": "date",
-                    "primary_key": false
+                    "lname": "День рождения"
                 },
-
                 {
                     "column_name": "street_id",
                     "type": "integer",
+                    "lname": "Улица",
                     "foreign_key": true,
                     "references": {
                         "table": "street",
@@ -162,6 +168,7 @@
                 {
                     "column_name": "city_id",
                     "type": "integer",
+                    "lname": "Город",
                     "foreign_key": true,
                     "references": {
                         "table": "city",
@@ -182,21 +189,22 @@
                 {
                     "column_name": "name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Название объекта"
                 },
                 {
                     "column_name": "stock_quantity",
                     "type": "integer",
-                    "primary_key": false
+                    "lname": "Количество запасов"
                 },
                 {
                     "column_name": "purchase_price",
                     "type": "double",
-                    "primary_key": false
+                    "lname": "Закупочная цена"
                 },
                 {
                     "column_name": "unit_id",
                     "type": "integer",
+                    "lname": "Ед.Измерения",
                     "foreign_key": true,
                     "references": {
                         "table": "unit_of_measurement",
@@ -213,12 +221,13 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
                     "column_name": "city_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Город"
                 }
             ]
         },
@@ -233,7 +242,7 @@
                 {
                     "column_name": "specialization_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Специализация"
                 }
             ]
         },
@@ -248,7 +257,7 @@
                 {
                     "column_name": "street_name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Улица"
                 }
             ]
         },
@@ -263,7 +272,7 @@
                 {
                     "column_name": "delivery_date",
                     "type": "date",
-                    "primary_key": false
+                    "lname": "Дата поставки"
                 }
             ]
         },
@@ -278,7 +287,7 @@
                 {
                     "column_name": "name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Банк"
                 }
             ]
         },
@@ -293,7 +302,7 @@
                 {
                     "column_name": "name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Ед.Измерения"
                 }
             ]
         },
@@ -308,7 +317,7 @@
                 {
                     "column_name": "name",
                     "type": "text",
-                    "primary_key": false
+                    "lname": "Вид работы"
                 }
             ]
         }

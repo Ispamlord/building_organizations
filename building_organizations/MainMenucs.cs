@@ -20,7 +20,7 @@ namespace building_organizations
         private bool isAbsolute = false;
         private bool isEditor = false;
         private bool isViewer = false;
-
+        private string tablename;
         public MainMenucs(user us)
         {
             this.us = us;
@@ -34,7 +34,7 @@ namespace building_organizations
 
         public void windowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isAbsolute)
+            if (us.role == "admin")
             {
                 QueryToolWindow qq = new QueryToolWindow();
                 qq.Show();
@@ -47,19 +47,8 @@ namespace building_organizations
 
         private void cityToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CityForm city = new CityForm();
-            switch (us.role)
-            {
-                case "admin":
-                    city.Show();
-                    break;
-                case "editor":
-                    city.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("city", dataGridView1);
-                    break;
-            }
+            databaseController.Select("city", dataGridView1);
+            tablename = "city";
         }
 
         private void changeRoleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,169 +64,67 @@ namespace building_organizations
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            //databaseController.Add_to_DataBase();
-        }
+
 
         private void delivery_Click(object sender, EventArgs e)
         {
-            Delivery delivery = new Delivery();
-            switch (us.role)
-            {
-                case "admin":
-                    delivery.Show();
-                    break;
-                case "editor":
-                    delivery.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("delivery", dataGridView1);
-                    break;
-            }
+            databaseController.Select("delivery", dataGridView1);
+            tablename = "delivery";
         }
 
         private void bank_Click(object sender, EventArgs e)
         {
-            Bank bank = new Bank();
-            switch (us.role)
-            {
-                case "admin":
-                    bank.Show();
-                    break;
-                case "editor":
-                    databaseController.SelectRawFromDataBase("bank", dataGridView1);
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("bank", dataGridView1);
-                    break;
-            }
+            databaseController.Select("bank", dataGridView1);
+            tablename = "bank";
         }
 
         private void Supply_Click(object sender, EventArgs e)
         {
-            Supplyer supplyer = new Supplyer();
-            switch (us.role)
-            {
-                case "admin":
-                    supplyer.Show();
-                    break;
-                case "editor":
-                    databaseController.SelectRawFromDataBase("supplier", dataGridView1);
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("supplier", dataGridView1);
-                    break;
-            }
+            databaseController.Select("supplier", dataGridView1);
+            tablename = "supplier";
         }
         private void Street_Click(object sender, EventArgs e)
         {
-            StreetForm streetForm = new StreetForm();
             databaseController.Select("street", dataGridView1);
+            tablename = "street";
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //databaseController.Remove();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //databaseController.UpdatetFromDataBase();
         }
 
         private void Bulding_materials_Click(object sender, EventArgs e)
         {
-            building_material building_Material = new building_material();
-            switch (us.role)
-            {
-                case "admin":
-                    building_Material.Show();
-                    break;
-                case "editor":
-                    building_Material.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("building_materials", dataGridView1);
-                    break;
-            }
+            databaseController.Select("building_materials", dataGridView1);
+            tablename = "building_materials";
         }
 
         private void work_type_Click(object sender, EventArgs e)
         {
-            Work_type work_type = new Work_type();
-            switch (us.role)
-            {
-                case "admin":
-                    work_type.Show();
-                    break;
-                case "editor":
-                    work_type.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("work_type", dataGridView1);
-                    break;
-            }
+            databaseController.Select("work_type", dataGridView1);
+            tablename = "work_type";
         }
 
         private void brigade_Click(object sender, EventArgs e)
         {
-            Brigade brigade;
-            switch (us.role)
-            {
-                case "admin":
-                    brigade = new Brigade();
-                    brigade.Show();
-                    break;
-                case "editor":
-                    brigade = new Brigade();
-                    brigade.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("brigade", dataGridView1);
-                    break;
-            }
+            databaseController.Select("brigade", dataGridView1);
+            tablename = "brigade";
         }
 
         private void workers_Click(object sender, EventArgs e)
         {
-            Worker worker = new Worker();
+
             databaseController.Select("workers", dataGridView1);
+            tablename = "workers";
         }
 
         private void unit_of_measurement_Click(object sender, EventArgs e)
         {
-            unit_of_measurement un = new unit_of_measurement();
-            switch (us.role)
-            {
-                case "admin":
-                    un.Show();
-                    break;
-                case "editor":
-                    un.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("unit_of_measurement", dataGridView1);
-                    break;
-            }
+            databaseController.Select("unit_of_measurement", dataGridView1);
+            tablename = "unit_of_measurement";
         }
 
         private void specialization_Click(object sender, EventArgs e)
         {
-            specialitation un = new specialitation();
-            switch (us.role)
-            {
-                case "admin":
-                    un.Show();
-                    break;
-                case "editor":
-                    un.Show();
-                    break;
-                case "viewer":
-                    databaseController.SelectRawFromDataBase("specialization", dataGridView1);
-                    break;
-            }
+            databaseController.Select("specialization", dataGridView1);
+            tablename = "specialization";
         }
 
         private void work_on_object_Click(object sender, EventArgs e)
@@ -253,7 +140,25 @@ namespace building_organizations
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //AddForm addForm  = new AddForm();
+            AddForm addForm = new AddForm(tablename);
+            addForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UpdateForm editForm = new UpdateForm();
+            editForm.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            databaseController.Delete(tablename, Convert.ToInt32(textBox1.Text));
+        }
+
     }
 }

@@ -17,7 +17,7 @@ namespace building_organizations.EntityForms
         public unit_of_measurement()
         {
             InitializeComponent();
-            database.SelectRawFromDataBase("unit_of_measurement", dataGridView1);
+            //database.SelectRawFromDataBase("unit_of_measurement", dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace building_organizations.EntityForms
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
                 string[] columns = { label1.Text, label2.Text };
 
-                database.Add_to_DataBase("unit_of_measurement", values, columns);
+                //database.Add_to_DataBase("unit_of_measurement", values, columns);
 
                 MessageBox.Show("Record added successfully.");
             }
@@ -43,7 +43,7 @@ namespace building_organizations.EntityForms
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("unit_of_measurement", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("unit_of_measurement", strings, textBox1.Text, ob);
             }
             catch
             {
@@ -53,7 +53,7 @@ namespace building_organizations.EntityForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            database.SelectRawFromDataBase("unit_of_measurement", dataGridView1);
+            //database.SelectRawFromDataBase("unit_of_measurement", dataGridView1);
         }
     }
 }

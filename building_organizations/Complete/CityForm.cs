@@ -17,12 +17,12 @@ namespace building_organizations
         public CityForm()
         {
             InitializeComponent();
-            database.SelectRawFromDataBase("city", dataGridView1);
+            //database.SelectRawFromDataBase("city", dataGridView1);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            database.SelectRawFromDataBase("city", dataGridView1);
+            //database.SelectRawFromDataBase("city", dataGridView1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace building_organizations
                 object[] values = { Convert.ToInt32(textBox1.Text), textBox2.Text };
                 string[] columns = { label1.Text, label2.Text };
 
-                database.Add_to_DataBase("city", values, columns);
+               // database.Add_to_DataBase("city", values, columns);
 
                 MessageBox.Show("Record added successfully.");
             }
@@ -52,7 +52,7 @@ namespace building_organizations
             string[] strings = { label2.Text };
             object[] ob = {textBox2.Text};
             try {
-                database.UpdatetFromDataBase("city", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("city", strings, textBox1.Text, ob);
             }
             catch
             {

@@ -21,7 +21,7 @@ namespace building_organizations.EntityForms
             string[] join = { "workers" };
             string[] id = { "brigadir_id" };
             string[] columns = { "last_name" };
-            database.SelectWithoutId("brigade", table, join, id, dataGridView1, columns);
+            //database.SelectWithoutId("brigade", table, join, id, dataGridView1, columns);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -52,7 +52,7 @@ namespace building_organizations.EntityForms
             object[] ob = { textBox2.Text };
             try
             {
-                database.UpdatetFromDataBase("brigade", strings, textBox1.Text, ob);
+                //database.UpdatetFromDataBase("brigade", strings, textBox1.Text, ob);
             }
 
             catch
@@ -67,7 +67,7 @@ namespace building_organizations.EntityForms
             string[] join = { "workers"};
             string[] id = { "brigadir_id" };
             string[] columns = { "last_name" };
-            database.SelectWithoutId("brigade",table,join, id, dataGridView1, columns);
+            //database.SelectWithoutId("brigade",table,join, id, dataGridView1, columns);
         }
         private void button4_Click(object sender, EventArgs e)
         {

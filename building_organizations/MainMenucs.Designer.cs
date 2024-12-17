@@ -59,6 +59,7 @@
             button3 = new Button();
             button4 = new Button();
             textBox1 = new TextBox();
+            comboBox1 = new ComboBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -213,8 +214,8 @@
             // windowToolStripMenuItem
             // 
             windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            windowToolStripMenuItem.Size = new Size(82, 24);
-            windowToolStripMenuItem.Text = "Консоль";
+            windowToolStripMenuItem.Size = new Size(59, 24);
+            windowToolStripMenuItem.Text = "Окно";
             windowToolStripMenuItem.Click += windowToolStripMenuItem_Click;
             // 
             // справкаToolStripMenuItem
@@ -266,24 +267,27 @@
             button2.TabIndex = 3;
             button2.Text = "Удалить";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(794, 189);
+            button3.Location = new Point(794, 205);
             button3.Name = "button3";
             button3.Size = new Size(200, 45);
             button3.TabIndex = 4;
             button3.Text = "Изменить";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(794, 108);
+            button4.Location = new Point(794, 138);
             button4.Name = "button4";
             button4.Size = new Size(200, 45);
             button4.TabIndex = 5;
             button4.Text = "Поиск";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // textBox1
             // 
@@ -292,11 +296,20 @@
             textBox1.Size = new Size(200, 27);
             textBox1.TabIndex = 6;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(794, 95);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(200, 28);
+            comboBox1.TabIndex = 7;
+            // 
             // MainMenucs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1006, 386);
+            Controls.Add(comboBox1);
             Controls.Add(textBox1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -347,5 +360,6 @@
         private Button button3;
         private Button button4;
         private TextBox textBox1;
+        private ComboBox comboBox1;
     }
 }
