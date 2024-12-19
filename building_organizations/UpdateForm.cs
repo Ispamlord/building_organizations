@@ -1,4 +1,6 @@
-﻿using System;
+﻿using building_organizations.Entity;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +9,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace building_organizations
 {
     public partial class UpdateForm : Form
     {
-        public UpdateForm()
+        private string tablename;
+        DatabaseController databaseController;
+        private List<TextBox> textBoxesList = new List<TextBox>();
+        public UpdateForm(string tablename)
         {
+            this.tablename = tablename;
+            databaseController = new DatabaseController();
+            string jsonFilePath = "C:\\Users\\serov\\source\\repos\\building_organizations\\building_organizations\\Entity\\Stetham.json";
+            string jsonContent = File.ReadAllText(jsonFilePath);
+            dynamic tables = JsonConvert.DeserializeObject(jsonContent);
+            this.Text = tablename;
+            int i = 0;
+            foreach (var table in tables)
+            {
+                if (table.table_name == tablename)
+                {
+                    foreach (var column in table.columns)
+                    {
+                        Label label = new Label();
+                        label.Text = column.lname;
+                        label.Location = new System.Drawing.Point(20, 20 + i * 40);
+                        label.AutoSize = true;
+                        label.Show();
+                        this.Controls.Add(label);
+                        TextBox textBox = new TextBox();
+                        textBox.Text = "";
+                        textBox.Location = new System.Drawing.Point(150, 20 + i * 40);
+                        textBox.Width = 200;
+                        i++;
+                        this.Controls.Add(textBox);
+                        textBoxesList.Add(textBox);
+                    }
+                }
+            }
+            Button saveButton = new Button
+            {
+                Text = "Сохранить",
+                Location = new System.Drawing.Point(150, 20 + i * 40),
+                Width = 100
+            };
+            saveButton.Click += SaveButton_Click;
+            this.Controls.Add(saveButton);
             InitializeComponent();
+        }
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            string[] data = { };
+            Array.Resize(ref data, textBoxesList.Count);
+            if (!int.TryParse(textBoxesList[0].Text, out int intResult))
+                throw new Exception($"Cannot convert '{textBoxesList[0].Text}' to integer. ID!!!");
+            for (int i = 0; i < textBoxesList.Count; i++)
+            {
+                string value = textBoxesList[i].Text;
+                data[i] = value;
+            }
+            databaseController.Update(tablename,data);
         }
     }
 }

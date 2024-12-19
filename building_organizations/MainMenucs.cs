@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 namespace building_organizations
 {
@@ -20,7 +21,7 @@ namespace building_organizations
         private bool isAbsolute = false;
         private bool isEditor = false;
         private bool isViewer = false;
-        private string tablename;
+        private string tablename = "";
         public MainMenucs(user us)
         {
             this.us = us;
@@ -48,6 +49,11 @@ namespace building_organizations
         private void cityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             databaseController.Select("city", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "city";
         }
 
@@ -69,42 +75,57 @@ namespace building_organizations
         private void delivery_Click(object sender, EventArgs e)
         {
             databaseController.Select("delivery", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "delivery";
         }
 
         private void bank_Click(object sender, EventArgs e)
         {
             databaseController.Select("bank", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "bank";
         }
 
-        private void Supply_Click(object sender, EventArgs e)
-        {
-            databaseController.Select("supplier", dataGridView1);
-            tablename = "supplier";
-        }
+
         private void Street_Click(object sender, EventArgs e)
         {
             databaseController.Select("street", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "street";
 
-        }
-
-        private void Bulding_materials_Click(object sender, EventArgs e)
-        {
-            databaseController.Select("building_materials", dataGridView1);
-            tablename = "building_materials";
         }
 
         private void work_type_Click(object sender, EventArgs e)
         {
             databaseController.Select("work_type", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "work_type";
         }
 
         private void brigade_Click(object sender, EventArgs e)
         {
             databaseController.Select("brigade", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "brigade";
         }
 
@@ -112,18 +133,33 @@ namespace building_organizations
         {
 
             databaseController.Select("workers", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "workers";
         }
 
         private void unit_of_measurement_Click(object sender, EventArgs e)
         {
             databaseController.Select("unit_of_measurement", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "unit_of_measurement";
         }
 
         private void specialization_Click(object sender, EventArgs e)
         {
             databaseController.Select("specialization", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
             tablename = "specialization";
         }
 
@@ -140,25 +176,121 @@ namespace building_organizations
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddForm addForm = new AddForm(tablename);
-            addForm.Show();
+            if (us.role == "viewer")
+            {
+                MessageBox.Show("Недостаточно прав");
+            }
+            else
+            {
+                if (tablename == "")
+                {
+                    MessageBox.Show("Выберите сначала таблицу!");
+                }
+                else
+                {
+                    AddForm addForm = new AddForm(tablename);
+                    addForm.Show();
+                }
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            UpdateForm editForm = new UpdateForm();
-            editForm.Show();
+            if (us.role == "viewer")
+            {
+                MessageBox.Show("Недостаточно прав");
+            }
+            else
+            {
+                if (tablename == "")
+                {
+                    MessageBox.Show("Выберите сначала таблицу!");
+                }
+                else
+                {
+                    UpdateForm editForm = new UpdateForm(tablename);
+                    editForm.Show();
+                }
+            }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            if (us.role == "viewer")
+            {
+                MessageBox.Show("Недостаточно прав");
+            }
+            else
+            {
+                if (tablename == "")
+                {
+                    MessageBox.Show("Выберите сначала таблицу!");
+                }
+                else
+                {
+                    databaseController.Find(comboBox1.Text, tablename, textBox1.Text, dataGridView1);
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            databaseController.Delete(tablename, Convert.ToInt32(textBox1.Text));
+            if (us.role == "viewer")
+            {
+                MessageBox.Show("Недостаточно прав");
+            }
+            else
+            {
+                if (tablename == "")
+                {
+                    MessageBox.Show("Выберите сначала таблицу!");
+                }
+                else
+                {
+                    databaseController.Delete(tablename, Convert.ToInt32(textBox1.Text));
+                }
+            }
+
         }
 
+        private void work_on_object_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Supplyer_Click(object sender, EventArgs e)
+        {
+            databaseController.Select("supplier", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
+            tablename = "supplier";
+        }
+
+        private void Bulding_materials_Click_1(object sender, EventArgs e)
+        {
+            databaseController.Select("building_materials", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
+            tablename = "building_materials";
+        }
+
+        private void объектToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            databaseController.Select("object", dataGridView1);
+            comboBox1.Items.Clear();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox1.Items.Add(column.HeaderText);
+            }
+            tablename = "object";
+        }
     }
 }

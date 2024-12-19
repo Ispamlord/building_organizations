@@ -28,7 +28,8 @@ namespace building_organizations.SettingForms
             
             if (us.password == textBox1.Text)
             {
-                
+                us.password = textBox2.Text;
+                databaseController.ChangePass(us.id, us.password);
             }
             else
             {

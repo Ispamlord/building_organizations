@@ -49,6 +49,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -75,6 +76,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -184,6 +186,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -237,6 +240,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -252,6 +256,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -267,6 +272,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -282,6 +288,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -297,6 +304,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {
@@ -312,6 +320,7 @@
                 {
                     "column_name": "id",
                     "type": "integer",
+                    "lname": "ID",
                     "primary_key": true
                 },
                 {

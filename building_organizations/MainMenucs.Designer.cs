@@ -31,22 +31,21 @@
             menuStrip1 = new MenuStrip();
             разноеToolStripMenuItem = new ToolStripMenuItem();
             changeRoleToolStripMenuItem = new ToolStripMenuItem();
-            настройкаToolStripMenuItem = new ToolStripMenuItem();
-            поменятьЯзыкToolStripMenuItem = new ToolStripMenuItem();
             changeToolStripMenuItem = new ToolStripMenuItem();
-            PeopleToolStripMenuItem = new ToolStripMenuItem();
+            ObjectToolStripMenuItem = new ToolStripMenuItem();
+            Supplyer = new ToolStripMenuItem();
+            Bulding_materials = new ToolStripMenuItem();
+            workers = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripMenuItem();
             DocumentToolStripMenuItem = new ToolStripMenuItem();
+            work_on_object = new ToolStripMenuItem();
+            заявкаToolStripMenuItem = new ToolStripMenuItem();
             SpravochnicToolStripMenuItem = new ToolStripMenuItem();
             City = new ToolStripMenuItem();
             Street = new ToolStripMenuItem();
             bank = new ToolStripMenuItem();
-            Supplyer = new ToolStripMenuItem();
             delivery = new ToolStripMenuItem();
-            Bulding_materials = new ToolStripMenuItem();
             work_type = new ToolStripMenuItem();
-            work_on_object = new ToolStripMenuItem();
-            workers = new ToolStripMenuItem();
-            brigade = new ToolStripMenuItem();
             unit_of_measurement = new ToolStripMenuItem();
             specialization = new ToolStripMenuItem();
             windowToolStripMenuItem = new ToolStripMenuItem();
@@ -60,6 +59,7 @@
             button4 = new Button();
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
+            объектToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -67,7 +67,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { разноеToolStripMenuItem, PeopleToolStripMenuItem, DocumentToolStripMenuItem, SpravochnicToolStripMenuItem, windowToolStripMenuItem, справкаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { разноеToolStripMenuItem, ObjectToolStripMenuItem, DocumentToolStripMenuItem, SpravochnicToolStripMenuItem, windowToolStripMenuItem, справкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1006, 28);
@@ -76,7 +76,7 @@
             // 
             // разноеToolStripMenuItem
             // 
-            разноеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { changeRoleToolStripMenuItem, настройкаToolStripMenuItem, changeToolStripMenuItem });
+            разноеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { changeRoleToolStripMenuItem, changeToolStripMenuItem });
             разноеToolStripMenuItem.Name = "разноеToolStripMenuItem";
             разноеToolStripMenuItem.Size = new Size(72, 24);
             разноеToolStripMenuItem.Text = "Разное";
@@ -88,19 +88,6 @@
             changeRoleToolStripMenuItem.Text = "Сменить роль";
             changeRoleToolStripMenuItem.Click += changeRoleToolStripMenuItem_Click;
             // 
-            // настройкаToolStripMenuItem
-            // 
-            настройкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { поменятьЯзыкToolStripMenuItem });
-            настройкаToolStripMenuItem.Name = "настройкаToolStripMenuItem";
-            настройкаToolStripMenuItem.Size = new Size(207, 26);
-            настройкаToolStripMenuItem.Text = "Настройка";
-            // 
-            // поменятьЯзыкToolStripMenuItem
-            // 
-            поменятьЯзыкToolStripMenuItem.Name = "поменятьЯзыкToolStripMenuItem";
-            поменятьЯзыкToolStripMenuItem.Size = new Size(199, 26);
-            поменятьЯзыкToolStripMenuItem.Text = "Поменять язык";
-            // 
             // changeToolStripMenuItem
             // 
             changeToolStripMenuItem.Name = "changeToolStripMenuItem";
@@ -108,21 +95,64 @@
             changeToolStripMenuItem.Text = "Сменить пароль";
             changeToolStripMenuItem.Click += сменитьПарольToolStripMenuItem_Click;
             // 
-            // PeopleToolStripMenuItem
+            // ObjectToolStripMenuItem
             // 
-            PeopleToolStripMenuItem.Name = "PeopleToolStripMenuItem";
-            PeopleToolStripMenuItem.Size = new Size(105, 24);
-            PeopleToolStripMenuItem.Text = "Сотрудники";
+            ObjectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Supplyer, Bulding_materials, workers, toolStripMenuItem1, объектToolStripMenuItem });
+            ObjectToolStripMenuItem.Name = "ObjectToolStripMenuItem";
+            ObjectToolStripMenuItem.Size = new Size(125, 24);
+            ObjectToolStripMenuItem.Text = "Строительство";
+            // 
+            // Supplyer
+            // 
+            Supplyer.Name = "Supplyer";
+            Supplyer.Size = new Size(224, 26);
+            Supplyer.Text = "Поставщик";
+            Supplyer.Click += Supplyer_Click;
+            // 
+            // Bulding_materials
+            // 
+            Bulding_materials.Name = "Bulding_materials";
+            Bulding_materials.Size = new Size(224, 26);
+            Bulding_materials.Text = "Стройматериалы";
+            Bulding_materials.Click += Bulding_materials_Click_1;
+            // 
+            // workers
+            // 
+            workers.Name = "workers";
+            workers.Size = new Size(224, 26);
+            workers.Text = "Рабочие";
+            workers.Click += workers_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(224, 26);
+            toolStripMenuItem1.Text = "Бригада";
+            toolStripMenuItem1.Click += brigade_Click;
             // 
             // DocumentToolStripMenuItem
             // 
+            DocumentToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { work_on_object, заявкаToolStripMenuItem });
             DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem";
             DocumentToolStripMenuItem.Size = new Size(101, 24);
             DocumentToolStripMenuItem.Text = "Документы";
             // 
+            // work_on_object
+            // 
+            work_on_object.Name = "work_on_object";
+            work_on_object.Size = new Size(168, 26);
+            work_on_object.Text = "Учет работ";
+            work_on_object.Click += work_on_object_Click_1;
+            // 
+            // заявкаToolStripMenuItem
+            // 
+            заявкаToolStripMenuItem.Name = "заявкаToolStripMenuItem";
+            заявкаToolStripMenuItem.Size = new Size(168, 26);
+            заявкаToolStripMenuItem.Text = "заявка";
+            // 
             // SpravochnicToolStripMenuItem
             // 
-            SpravochnicToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { City, Street, bank, Supplyer, delivery, Bulding_materials, work_type, work_on_object, workers, brigade, unit_of_measurement, specialization });
+            SpravochnicToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { City, Street, bank, delivery, work_type, unit_of_measurement, specialization });
             SpravochnicToolStripMenuItem.Name = "SpravochnicToolStripMenuItem";
             SpravochnicToolStripMenuItem.Size = new Size(108, 24);
             SpravochnicToolStripMenuItem.Text = "Справочник";
@@ -148,13 +178,6 @@
             bank.Text = "Банк";
             bank.Click += bank_Click;
             // 
-            // Supplyer
-            // 
-            Supplyer.Name = "Supplyer";
-            Supplyer.Size = new Size(300, 26);
-            Supplyer.Text = "Поставщик";
-            Supplyer.Click += Supply_Click;
-            // 
             // delivery
             // 
             delivery.Name = "delivery";
@@ -162,40 +185,12 @@
             delivery.Text = "Поставка";
             delivery.Click += delivery_Click;
             // 
-            // Bulding_materials
-            // 
-            Bulding_materials.Name = "Bulding_materials";
-            Bulding_materials.Size = new Size(300, 26);
-            Bulding_materials.Text = "Стройматериалы";
-            Bulding_materials.Click += Bulding_materials_Click;
-            // 
             // work_type
             // 
             work_type.Name = "work_type";
             work_type.Size = new Size(300, 26);
             work_type.Text = "Вид работы";
             work_type.Click += work_type_Click;
-            // 
-            // work_on_object
-            // 
-            work_on_object.Name = "work_on_object";
-            work_on_object.Size = new Size(300, 26);
-            work_on_object.Text = "Учет работ";
-            work_on_object.Click += work_on_object_Click;
-            // 
-            // workers
-            // 
-            workers.Name = "workers";
-            workers.Size = new Size(300, 26);
-            workers.Text = "Рабочие";
-            workers.Click += workers_Click;
-            // 
-            // brigade
-            // 
-            brigade.Name = "brigade";
-            brigade.Size = new Size(300, 26);
-            brigade.Text = "Бригада";
-            brigade.Click += brigade_Click;
             // 
             // unit_of_measurement
             // 
@@ -242,7 +237,7 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
-            dataGridView1.Location = new Point(0, 31);
+            dataGridView1.Location = new Point(0, 32);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(788, 342);
@@ -304,6 +299,13 @@
             comboBox1.Size = new Size(200, 28);
             comboBox1.TabIndex = 7;
             // 
+            // объектToolStripMenuItem
+            // 
+            объектToolStripMenuItem.Name = "объектToolStripMenuItem";
+            объектToolStripMenuItem.Size = new Size(224, 26);
+            объектToolStripMenuItem.Text = "Объект";
+            объектToolStripMenuItem.Click += объектToolStripMenuItem_Click;
+            // 
             // MainMenucs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -331,7 +333,7 @@
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem разноеToolStripMenuItem;
-        private ToolStripMenuItem PeopleToolStripMenuItem;
+        private ToolStripMenuItem ObjectToolStripMenuItem;
         private ToolStripMenuItem DocumentToolStripMenuItem;
         private ToolStripMenuItem SpravochnicToolStripMenuItem;
         private ToolStripMenuItem windowToolStripMenuItem;
@@ -342,17 +344,10 @@
         private ToolStripMenuItem справкаToolStripMenuItem;
         private ToolStripMenuItem AProgrammToolStripMenuItem;
         private ToolStripMenuItem SoderzhanieToolStripMenuItem;
-        private ToolStripMenuItem настройкаToolStripMenuItem;
-        private ToolStripMenuItem поменятьЯзыкToolStripMenuItem;
         private DataGridView dataGridView1;
         private ToolStripMenuItem changeToolStripMenuItem;
-        private ToolStripMenuItem Supplyer;
         private ToolStripMenuItem delivery;
-        private ToolStripMenuItem Bulding_materials;
         private ToolStripMenuItem work_type;
-        private ToolStripMenuItem work_on_object;
-        private ToolStripMenuItem workers;
-        private ToolStripMenuItem brigade;
         private ToolStripMenuItem unit_of_measurement;
         private ToolStripMenuItem specialization;
         private Button button1;
@@ -361,5 +356,12 @@
         private Button button4;
         private TextBox textBox1;
         private ComboBox comboBox1;
+        private ToolStripMenuItem Supplyer;
+        private ToolStripMenuItem Bulding_materials;
+        private ToolStripMenuItem workers;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem work_on_object;
+        private ToolStripMenuItem заявкаToolStripMenuItem;
+        private ToolStripMenuItem объектToolStripMenuItem;
     }
 }

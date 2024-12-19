@@ -22,7 +22,7 @@ namespace building_organizations
         {
             this.tablename = tablename;
             databaseController = new DatabaseController();
-            string jsonFilePath = "C:\\Users\\serov\\source\\repos\\building_organizations\\building_organizations\\Entity\\Tables.json";
+            string jsonFilePath = "C:\\Users\\serov\\source\\repos\\building_organizations\\building_organizations\\Entity\\Stetham.json";
             string jsonContent = File.ReadAllText(jsonFilePath);
             dynamic tables = JsonConvert.DeserializeObject(jsonContent);
             this.Text = tablename;

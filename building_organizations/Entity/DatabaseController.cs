@@ -19,7 +19,7 @@ namespace building_organizations.Entity
     
     public class DatabaseController
     {
-        private string jsonFilePath = "C:\\Users\\serov\\source\\repos\\building_organizations\\building_organizations\\Entity\\Tables.json";
+        private string jsonFilePath = "C:\\Users\\serov\\source\\repos\\building_organizations\\building_organizations\\Entity\\Stetham.json";
         private string sqlCon = "Server=localhost;Port=5432;Database=building_constraction;User id = postgres; Password=1234;";
         private NpgsqlConnection sqlConnection;
         private NpgsqlDataReader reader;
@@ -29,7 +29,97 @@ namespace building_organizations.Entity
             sqlConnection.Open();
             jsonContent = File.ReadAllText(jsonFilePath);
         }
-        public void Update(string tablename, string[] update,int id)
+        public void Find(string columna, string tablename, string data, DataGridView d)
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = sqlConnection;
+            command.CommandType = CommandType.Text;
+            string a = "@where";
+
+            string where = $"WHERE "; 
+            try
+            {
+                dynamic tables = JsonConvert.DeserializeObject(jsonContent);
+                string sql = "";
+                foreach (var table in tables)
+                {
+                    if (table.table_name == tablename)
+                    {
+                        var columns = table.columns;
+                        var lastcolum = columns.Last;
+                        sql = $"SELECT ";
+
+                        foreach (var column in table.columns)
+                        {
+                            if (column.references != null)
+                            {
+                                var refer = column.references;
+                                sql += $"{refer.table}.{refer.replace_with} AS {column.lname}";
+                                string s = column.lname.ToString();
+                                if (columna == s)
+                                {
+                                    string rtable = refer.table != null ? refer.table.ToString() : "";
+                                    string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
+                                    int? id = FindIdByType(rtable, Replece, data);
+
+                                    where += $" {refer.table}.id = {a} ";
+                                    command.Parameters.AddWithValue(a, id);
+                                }
+                            }
+                            else
+                            {
+                                if (column.primary_key == null) sql += $"{table.table_name}.{column.column_name} AS \"{column.lname}\"";
+                                else sql += $"{table.table_name}.{column.column_name}";
+                                string s = column.lname.ToString();
+                                if (columna == s)
+                                {
+                                    string columnType = column.type != null ? column.type.ToString() : "";
+                                    object r = ReturnType(columnType, data);
+                                    command.Parameters.AddWithValue(a, r);
+                                    where += $" {table.table_name}.{column.column_name} = {a} ";
+                                }
+                            }
+                            if (column != lastcolum)
+                            {
+                                sql += ", ";
+                            }
+                            
+                        }
+                        sql += $" FROM {table.table_name} ";
+                        
+                        foreach (var column in columns)
+                        {
+                            if (column.references != null)
+                            {
+                                var refer = column.references;
+                                sql += $" JOIN {refer.table} ON {refer.table}.id = {table.table_name}.{column.column_name} ";
+                            }
+                        }
+                        sql += where;
+                        sql += ";";
+                        MessageBox.Show(sql);
+                    }
+                }
+
+                command.CommandText = sql;
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
+                        d.DataSource = dt;
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show($"Ошибка выполнения запроса: {ex.Message}"); }
+            finally { 
+                command.Dispose(); 
+            }
+        }
+            
+        
+        public void Update(string tablename, string[] update)
         {
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = sqlConnection;
@@ -39,7 +129,8 @@ namespace building_organizations.Entity
             int i = 0;
             string idparam = "@idparam";
             string Where =$" WHERE id = {idparam};";
-            command.Parameters.AddWithValue(idparam, id);
+            command.Parameters.AddWithValue(idparam, Convert.ToInt32(update[i]));
+            i++;
             try {
                 foreach(var table in tables)
                 {
@@ -63,7 +154,9 @@ namespace building_organizations.Entity
                                 var refer = column.references;
                                 string paramname = $"@param{i}";
                                 sql += $"SET {column.column_name} = {paramname} ";
-                                int? ids = FindIdByType(refer.table,  refer.replace_with, update[i]);
+                                string rtable = refer.table != null ? refer.table.ToString() : "";
+                                string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
+                                int? ids = FindIdByType(rtable, Replece, update[i]);
                                 if (!ids.HasValue)
                                 {
                                     MessageBox.Show("No ID found.");
@@ -75,7 +168,8 @@ namespace building_organizations.Entity
                             {
                                 string paramname = $"@param{i}";
                                 sql += $"SET {column.column_name} = {paramname}";
-                                object r = ReturnType(column.type,update[i]);
+                                string columnType = column.type != null ? column.type.ToString() : "";
+                                object r = ReturnType(columnType, update[i]);
                                 command.Parameters.AddWithValue(paramname, r);
                             }
                             if (column != lastcolum)
@@ -88,9 +182,14 @@ namespace building_organizations.Entity
                 }
                 
                 sql += Where;
-                
+                command.CommandText = sql;
+                command.ExecuteNonQuery();
+                command.Dispose();
+
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { 
+                MessageBox.Show(ex.Message);
+            }
         }
         public void Delete(string tablename, string column, string data) {
             string sql = $"DELETE FROM {tablename} WHERE {column} = {data};";
@@ -152,7 +251,6 @@ namespace building_organizations.Entity
                         sql += ";";
                     }
                 }
-                MessageBox.Show(sql);
                 command.CommandText = sql;
                 using (var reader = command.ExecuteReader())
                 {
@@ -333,6 +431,18 @@ namespace building_organizations.Entity
                 command.Dispose(); 
             }
 
+        }
+        public void ChangePass(int id, string password) {
+            HashingPassword hashingPassword = new HashingPassword();
+            NpgsqlCommand command = new NpgsqlCommand();
+            string sq = "UPDATE users SET passwords = @password WHERE id = @id";
+            string pass = HashingPassword.HashPassword(password);
+            command.Connection = sqlConnection;
+            command.CommandType = CommandType.Text;
+            command.CommandText = sq;
+            command.Parameters.AddWithValue("@password", pass);
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery();
         }
         //создание пользователя
         public void CreateUser(string username, string password, string role)
