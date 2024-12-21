@@ -404,32 +404,44 @@ namespace building_organizations.Entity
         //функция для свободных Select запросов
         public void QueryTool(string sql, DataGridView dataGridView)
         {
-            bool result = sql.Contains("SELECT");
-            if (result)
+            try
             {
-                NpgsqlCommand command = new NpgsqlCommand();
-                command.Connection = sqlConnection;
-                command.CommandType = CommandType.Text;
-                command.CommandText = sql;
-                DataTable dt = new DataTable();
-                using (var reader = command.ExecuteReader())
+                bool result = sql.Contains("SELECT");
+                if (result)
                 {
-                    if (reader.HasRows)
+                    NpgsqlCommand command = new NpgsqlCommand();
+                    command.Connection = sqlConnection;
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = sql;
+                    DataTable dt = new DataTable();
+                    using (var reader = command.ExecuteReader())
                     {
-                        dt.Load(reader);
-                        dataGridView.DataSource = dt;
+                        if (reader.HasRows)
+                        {
+                            dt.Load(reader);
+                            dataGridView.DataSource = dt;
+                        }
                     }
+                    command.Dispose();
                 }
-                command.Dispose();
+                else
+                {
+                    NpgsqlCommand command = new NpgsqlCommand();
+                    command.Connection = sqlConnection;
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = sql;
+                    command.ExecuteReader();
+                    command.Dispose();
+                }
             }
-            else {
-                NpgsqlCommand command = new NpgsqlCommand();
-                command.Connection = sqlConnection;
-                command.CommandType = CommandType.Text;
-                command.CommandText = sql;
-                command.ExecuteReader();
-                command.Dispose(); 
+            catch (Exception ex)
+            {
+
             }
+            finally {
+                
+            }
+            
 
         }
         public void ChangePass(int id, string password) {
