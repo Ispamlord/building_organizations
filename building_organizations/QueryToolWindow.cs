@@ -1,4 +1,5 @@
 ﻿using building_organizations.Entity;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,12 +23,15 @@ namespace building_organizations
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            string queryText = textBox1.Text.Trim();
+
+            if (!queryText.StartsWith("Select", StringComparison.OrdinalIgnoreCase))
             {
-                databaseController.QueryTool(textBox1.Text, dataGridView1);
+                MessageBox.Show("Ошибка: запрос должен начинаться с 'Select'.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex) {
-            }
+            databaseController.QueryTool(queryText, dataGridView1);
+            
         }
     }
 }

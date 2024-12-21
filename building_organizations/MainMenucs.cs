@@ -1,5 +1,4 @@
 ﻿using building_organizations.Entity;
-using building_organizations.EntityForms;
 using building_organizations.SettingForms;
 using System;
 using System.Collections.Generic;
@@ -18,9 +17,6 @@ namespace building_organizations
     {
         private DatabaseController databaseController;
         private user us;
-        private bool isAbsolute = false;
-        private bool isEditor = false;
-        private bool isViewer = false;
         private string tablename = "";
         public MainMenucs(user us)
         {
@@ -28,8 +24,6 @@ namespace building_organizations
             InitializeComponent();
             databaseController = new DatabaseController();
             dataGridView1.ReadOnly = false;
-            dataGridView1.AllowUserToAddRows = true; // Разрешить добавлять строки
-            dataGridView1.EditMode = DataGridViewEditMode.EditOnKeystroke; // Включить режим редактирования
 
         }
 

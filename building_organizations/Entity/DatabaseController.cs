@@ -406,42 +406,28 @@ namespace building_organizations.Entity
         {
             try
             {
-                bool result = sql.Contains("SELECT");
-                if (result)
-                {
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = sqlConnection;
-                    command.CommandType = CommandType.Text;
-                    command.CommandText = sql;
-                    DataTable dt = new DataTable();
-                    using (var reader = command.ExecuteReader())
+                    using (var command = new NpgsqlCommand())
                     {
-                        if (reader.HasRows)
+                        command.Connection = sqlConnection;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = sql;
+                        using (var reader = command.ExecuteReader())
                         {
-                            dt.Load(reader);
-                            dataGridView.DataSource = dt;
+                            dataGridView.DataSource = null;
+
+                            var dataTable = new System.Data.DataTable();
+                            dataTable.Load(reader);
+
+                            dataGridView.DataSource = dataTable;
                         }
                     }
-                    command.Dispose();
-                }
-                else
-                {
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = sqlConnection;
-                    command.CommandType = CommandType.Text;
-                    command.CommandText = sql;
-                    command.ExecuteReader();
-                    command.Dispose();
-                }
+                
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Ошибка при выполнении запроса: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            }
-            finally {
-                
-            }
-            
 
         }
         public void ChangePass(int id, string password) {
