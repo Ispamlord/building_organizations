@@ -286,5 +286,28 @@ namespace building_organizations
             }
             tablename = "object";
         }
+
+        private void DocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (us.role == "admin")
+            {
+                QueryToolWindow qq = new QueryToolWindow();
+                qq.Show();
+            }
+            else
+            {
+                MessageBox.Show("Недостаточно прав");
+            }
+        }
+
+        private void tablepromToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void работаНаОбъектеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

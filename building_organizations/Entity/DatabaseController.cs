@@ -75,8 +75,17 @@ namespace building_organizations.Entity
                                 {
                                     string columnType = column.type != null ? column.type.ToString() : "";
                                     object r = ReturnType(columnType, data);
-                                    command.Parameters.AddWithValue(a, r);
-                                    where += $" {table.table_name}.{column.column_name} = {a} ";
+                                    if (columnType == "text")
+                                    {
+                                        command.Parameters.AddWithValue($"%{a}%", r);
+                                        where += $" {table.table_name}.{column.column_name} LIKE {a} ";
+                                    }
+                                    else
+                                    {
+                                        command.Parameters.AddWithValue(a, r);
+                                        where += $" {table.table_name}.{column.column_name} = {a} ";
+                                    }
+                                    
                                 }
                             }
                             if (column != lastcolum)
@@ -104,12 +113,11 @@ namespace building_organizations.Entity
                 command.CommandText = sql;
                 using (var reader = command.ExecuteReader())
                 {
-                    if (reader.HasRows)
-                    {
+                    
                         DataTable dt = new DataTable();
                         dt.Load(reader);
                         d.DataSource = dt;
-                    }
+                    
                 }
             }
             catch (Exception ex) { MessageBox.Show($"Ошибка выполнения запроса: {ex.Message}"); }
@@ -118,7 +126,6 @@ namespace building_organizations.Entity
             }
         }
             
-        
         public void Update(string tablename, string[] update)
         {
             NpgsqlCommand command = new NpgsqlCommand();
@@ -430,6 +437,7 @@ namespace building_organizations.Entity
 
 
         }
+        //Для 
         public void ChangePass(int id, string password) {
             HashingPassword hashingPassword = new HashingPassword();
             NpgsqlCommand command = new NpgsqlCommand();

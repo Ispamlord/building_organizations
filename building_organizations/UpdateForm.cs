@@ -37,10 +37,11 @@ namespace building_organizations
                         label.Text = column.lname;
                         label.Location = new System.Drawing.Point(20, 20 + i * 40);
                         label.AutoSize = true;
+                        label.Font = new Font("Impact", 12F);
                         label.Show();
                         this.Controls.Add(label);
                         TextBox textBox = new TextBox();
-                        textBox.Text = "";
+                        //textBox.Text = defaults[i];
                         textBox.Location = new System.Drawing.Point(150, 20 + i * 40);
                         textBox.Width = 200;
                         i++;
@@ -55,6 +56,12 @@ namespace building_organizations
                 Location = new System.Drawing.Point(150, 20 + i * 40),
                 Width = 100
             };
+            saveButton.BackColor = Color.FromArgb(255, 128, 128);
+            saveButton.Font = new Font("Impact", 14F);
+            saveButton.Size = new Size(177, 81);
+            saveButton.TabIndex = 2;
+            saveButton.Text = "Подтвердить";
+            saveButton.UseVisualStyleBackColor = false;
             saveButton.Click += SaveButton_Click;
             this.Controls.Add(saveButton);
             InitializeComponent();

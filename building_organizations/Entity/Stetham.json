@@ -1,333 +1,513 @@
+[
+    {
+        "table_name": "object",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "object_name",
+                "type": "text",
+                "lname": "Название Объекта"
+            },
+            {
+                "column_name": "house_number",
+                "type": "integer",
+                "lname": "Номер дома"
+            },
+            {
+                "column_name": "city_id",
+                "type": "integer",
+                "lname": "Город",
+                "foreign_key": true,
+                "references": {
+                    "table": "city",
+                    "type": "text",
+                    "replace_with": "city_name"
+                }
+            },
+            {
+                "column_name": "street_id",
+                "type": "integer",
+                "lname": "Улица",
+                "foreign_key": true,
+                "references": {
+                    "table": "street",
+                    "type": "text",
+                    "replace_with": "street_name"
+                }
+            }
+        ]
+    },
+    {
+        "table_name": "brigade",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "name",
+                "type": "text",
+                "lname": "Название Бригады"
+            },
+            {
+                "column_name": "brigadir_id",
+                "type": "integer",
+                "lname": "Бригадир",
+                "foreign_key": true,
+                "references": {
+                    "table": "workers",
+                    "type": "text",
+                    "replace_with": "last_name"
+                }
+            }
+        ]
+    },
+    {
+        "table_name": "supplier",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "last_name",
+                "type": "text",
+                "lname": "Фамилия"
+            },
+            {
+                "column_name": "first_name",
+                "type": "text",
+                "lname": "Имя"
+            },
+            {
+                "column_name": "middle_name",
+                "type": "text",
+                "lname": "Отчество"
+            },
+            {
+                "column_name": "account_number",
+                "type": "text",
+                "lname": "Номер аккаунта"
+            },
+            {
+                "column_name": "inn",
+                "type": "integer",
+                "lname": "ИНН"
+            },
+            {
+                "column_name": "bank_id",
+                "type": "integer",
+                "lname": "Банк",
+                "foreign_key": true,
+                "references": {
+                    "table": "bank",
+                    "type": "text",
+                    "replace_with": "name"
+                }
+            }
+        ]
+    },
+    {
+        "table_name": "workers",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "last_name",
+                "type": "text",
+                "lname": "Фамилия"
+            },
+            {
+                "column_name": "first_name",
+                "type": "text",
+                "lname": "Имя"
+            },
+            {
+                "column_name": "middle_name",
+                "type": "text",
+                "lname": "Отчество"
+            },
+            {
+                "column_name": "gender",
+                "type": "text",
+                "lname": "Пол"
+            },
+            {
+                "column_name": "work_experience",
+                "type": "double",
+                "lname": "Опыт работы"
+            },
+            {
+                "column_name": "birth_date",
+                "type": "date",
+                "lname": "День рождения"
+            },
+            {
+                "column_name": "street_id",
+                "type": "integer",
+                "lname": "Улица",
+                "foreign_key": true,
+                "references": {
+                    "table": "street",
+                    "type": "text",
+                    "replace_with": "street_name"
+                }
+            },
+            {
+                "column_name": "city_id",
+                "type": "integer",
+                "lname": "Город",
+                "foreign_key": true,
+                "references": {
+                    "table": "city",
+                    "type": "text",
+                    "replace_with": "city_name"
+                }
+            }
+        ]
+    },
+    {
+        "table_name": "building_materials",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "name",
+                "type": "text",
+                "lname": "Название объекта"
+            },
+            {
+                "column_name": "stock_quantity",
+                "type": "integer",
+                "lname": "Количество запасов"
+            },
+            {
+                "column_name": "purchase_price",
+                "type": "double",
+                "lname": "Закупочная цена"
+            },
+            {
+                "column_name": "unit_id",
+                "type": "integer",
+                "lname": "Измерение",
+                "foreign_key": true,
+                "references": {
+                    "table": "unit_of_measurement",
+                    "type": "text",
+                    "replace_with": "name"
+                }
+            }
 
-    [
-        {
-            "table_name": "object",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "object_name",
+        ]
+    },
+    {
+        "table_name": "city",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "city_name",
+                "type": "text",
+                "lname": "Город"
+            }
+        ]
+    },
+    {
+        "table_name": "specialization",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "specialization_name",
+                "type": "text",
+                "lname": "Специализация"
+            }
+        ]
+    },
+    {
+        "table_name": "street",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "street_name",
+                "type": "text",
+                "lname": "Улица"
+            }
+        ]
+    },
+    {
+        "table_name": "delivery",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "delivery_date",
+                "type": "date",
+                "lname": "Дата поставки"
+            }
+        ]
+    },
+    {
+        "table_name": "bank",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "name",
+                "type": "text",
+                "lname": "Банк"
+            }
+        ]
+    },
+    {
+        "table_name": "unit_of_measurement",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "name",
+                "type": "text",
+                "lname": "Ед.Измерения"
+            }
+        ]
+    },
+    {
+        "table_name": "work_type",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "name",
+                "type": "text",
+                "lname": "Вид работы"
+            }
+        ]
+    },
+    {
+        "table_name": "brigade_on_object",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "object_id",
+                "type": "integer",
+                "lname": "Название объекта",
+                "foreign_key": true,
+                "references": {
+                    "table": "object",
                     "type": "text",
-                    "lname": "Название Объекта"
-                },
-                {
-                    "column_name": "house_number",
-                    "type": "integer",
-                    "lname": "Номер дома"
-                },
-                {
-                    "column_name": "city_id",
-                    "type": "integer",
-                    "lname": "Город",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "city",
-                        "type": "text",
-                        "replace_with": "city_name"
-                    }
-                },
-                {
-                    "column_name": "street_id",
-                    "type": "integer",
-                    "lname": "Улица",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "street",
-                        "type": "text",
-                        "replace_with": "street_name"
-                    }
+                    "replace_with": "object_name"
                 }
-            ]
-        },
-        {
-            "table_name": "brigade",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "name",
+            },
+            {
+                "column_name": "brigade_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "brigade",
                     "type": "text",
-                    "lname": "Название Бригады"
-                },
-                {
-                    "column_name": "brigadir_id",
-                    "type": "integer",
-                    "lname": "Бригадир",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "workers",
-                        "type": "text",
-                        "replace_with": "last_name"
-                    }
+                    "replace_with": "name"
                 }
-            ]
-        },
-        {
-            "table_name": "supplier",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "last_name",
-                    "type": "text",
-                    "lname": "Фамилия"
-                },
-                {
-                    "column_name": "first_name",
-                    "type": "text",
-                    "lname": "Имя"
-                },
-                {
-                    "column_name": "middle_name",
-                    "type": "text",
-                    "lname": "Отчество"
-                },
-                {
-                    "column_name": "account_number",
-                    "type": "text",
-                    "lname": "Номер аккаунта"
-                },
-                {
-                    "column_name": "inn",
-                    "type": "integer",
-                    "lname": "ИНН"
-                },
-                {
-                    "column_name": "bank_id",
-                    "type": "integer",
-                    "lname": "Банк",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "bank",
-                        "type": "text",
-                        "replace_with": "name"
-                    }
-                }
-            ]
-        },
-        {
-            "table_name": "workers",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "last_name",
-                    "type": "text",
-                    "lname": "Фамилия"
-                },
-                {
-                    "column_name": "first_name",
-                    "type": "text",
-                    "lname": "Имя"
-                },
-                {
-                    "column_name": "middle_name",
-                    "type": "text",
-                    "lname": "Отчество"
-                },
-                {
-                    "column_name": "gender",
-                    "type": "text",
-                    "lname": "Пол"
-                },
-                {
-                    "column_name": "work_experience",
-                    "type": "double",
-                    "lname": "Опыт работы"
-                },
-                {
-                    "column_name": "birth_date",
-                    "type": "date",
-                    "lname": "День рождения"
-                },
-                {
-                    "column_name": "street_id",
-                    "type": "integer",
-                    "lname": "Улица",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "street",
-                        "type": "text",
-                        "replace_with": "street_name"
-                    }
-                },
-                {
-                    "column_name": "city_id",
-                    "type": "integer",
-                    "lname": "Город",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "city",
-                        "type": "text",
-                        "replace_with": "city_name"
-                    }
-                }
-            ]
-        },
-        {
-            "table_name": "building_materials",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "name",
-                    "type": "text",
-                    "lname": "Название объекта"
-                },
-                {
-                    "column_name": "stock_quantity",
-                    "type": "integer",
-                    "lname": "Количество запасов"
-                },
-                {
-                    "column_name": "purchase_price",
-                    "type": "double",
-                    "lname": "Закупочная цена"
-                },
-                {
-                    "column_name": "unit_id",
-                    "type": "integer",
-                    "lname": "Ед.Измерения",
-                    "foreign_key": true,
-                    "references": {
-                        "table": "unit_of_measurement",
-                        "type": "text",
-                        "replace_with": "name"
-                    }
-                }
+            }
 
-            ]
-        },
-        {
-            "table_name": "city",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "city_name",
+        ]
+    },
+    {
+        "table_name": "building_materials_object",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "material_id",
+                "type": "integer",
+                "lname": "Название объекта",
+                "foreign_key": true,
+                "references": {
+                    "table": "building_materials",
                     "type": "text",
-                    "lname": "Город"
+                    "replace_with": "name"
                 }
-            ]
-        },
-        {
-            "table_name": "specialization",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "specialization_name",
+            },
+            {
+                "column_name": "object_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "object",
                     "type": "text",
-                    "lname": "Специализация"
+                    "replace_with": "object_name"
                 }
-            ]
-        },
-        {
-            "table_name": "street",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "street_name",
+            }
+
+        ]
+    },
+    {
+        "table_name": "delivery_suplplier",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "supplier_id",
+                "type": "integer",
+                "lname": "Название объекта",
+                "foreign_key": true,
+                "references": {
+                    "table": "supplier",
                     "type": "text",
-                    "lname": "Улица"
+                    "replace_with": "last_name"
                 }
-            ]
-        },
-        {
-            "table_name": "delivery",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "delivery_date",
+            },
+            {
+                "column_name": "delivery_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "delivery",
                     "type": "date",
-                    "lname": "Дата поставки"
+                    "replace_with": "delivery_date"
                 }
-            ]
-        },
-        {
-            "table_name": "bank",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "name",
+            }
+
+        ]
+    },
+    {
+        "table_name": "specialization_workers",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "specialization_id",
+                "type": "integer",
+                "lname": "Название объекта",
+                "foreign_key": true,
+                "references": {
+                    "table": "specialization",
                     "type": "text",
-                    "lname": "Банк"
+                    "replace_with": "specialization_name"
                 }
-            ]
-        },
-        {
-            "table_name": "unit_of_measurement",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "name",
+            },
+            {
+                "column_name": "worker_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "workers",
                     "type": "text",
-                    "lname": "Ед.Измерения"
+                    "replace_with": "last_name"
                 }
-            ]
-        },
-        {
-            "table_name": "work_type",
-            "columns": [
-                {
-                    "column_name": "id",
-                    "type": "integer",
-                    "lname": "ID",
-                    "primary_key": true
-                },
-                {
-                    "column_name": "name",
+            }
+
+        ]
+    },
+    {
+        "table_name": "work_on_object",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+            {
+                "column_name": "date_",
+                "type": "date",
+                "lname": "Дата отчета"
+            },
+            {
+                "column_name": "value_work",
+                "type": "double",
+                "lname": "Количество работы"
+            },
+            {
+                "column_name": "work_type_id",
+                "type": "integer",
+                "lname": "Тип сделанной работы",
+                "foreign_key": true,
+                "references": {
+                    "table": "work_type",
                     "type": "text",
-                    "lname": "Вид работы"
+                    "replace_with": "name"
                 }
-            ]
-        }
-    ]
+            },
+            {
+                "column_name": "object_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "object",
+                    "type": "text",
+                    "replace_with": "object_name"
+                }
+            }
+
+        ]
+    }
+
+]
