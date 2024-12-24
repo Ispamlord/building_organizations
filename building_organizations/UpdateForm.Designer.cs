@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(128, 128, 255);
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(418, 450);
             Name = "UpdateForm";
             Text = "UpdateForm";
             ResumeLayout(false);

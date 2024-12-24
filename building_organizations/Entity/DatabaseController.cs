@@ -77,7 +77,8 @@ namespace building_organizations.Entity
                                     object r = ReturnType(columnType, data);
                                     if (columnType == "text")
                                     {
-                                        command.Parameters.AddWithValue($"%{a}%", r);
+                                        string pattern = $"%{data}%";
+                                        command.Parameters.AddWithValue(a, pattern);
                                         where += $" {table.table_name}.{column.column_name} LIKE {a} ";
                                     }
                                     else

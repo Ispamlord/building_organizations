@@ -309,5 +309,18 @@ namespace building_organizations
         {
 
         }
+
+        private void AProgrammToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Aboutprogram aboutprogram = new Aboutprogram();
+            aboutprogram.Show();
+
+        }
+
+        private void SoderzhanieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

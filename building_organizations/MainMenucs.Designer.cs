@@ -92,7 +92,7 @@
             // 
             changeRoleToolStripMenuItem.Name = "changeRoleToolStripMenuItem";
             changeRoleToolStripMenuItem.Size = new Size(217, 26);
-            changeRoleToolStripMenuItem.Text = "Сменить роль";
+            changeRoleToolStripMenuItem.Text = "Выйти";
             changeRoleToolStripMenuItem.Click += changeRoleToolStripMenuItem_Click;
             // 
             // changeToolStripMenuItem
@@ -269,12 +269,14 @@
             AProgrammToolStripMenuItem.Name = "AProgrammToolStripMenuItem";
             AProgrammToolStripMenuItem.Size = new Size(224, 26);
             AProgrammToolStripMenuItem.Text = "О программе";
+            AProgrammToolStripMenuItem.Click += AProgrammToolStripMenuItem_Click;
             // 
             // SoderzhanieToolStripMenuItem
             // 
             SoderzhanieToolStripMenuItem.Name = "SoderzhanieToolStripMenuItem";
             SoderzhanieToolStripMenuItem.Size = new Size(224, 26);
             SoderzhanieToolStripMenuItem.Text = "Содержание";
+            SoderzhanieToolStripMenuItem.Click += SoderzhanieToolStripMenuItem_Click;
             // 
             // dataGridView1
             // 

@@ -1,6 +1,6 @@
 ﻿namespace building_organizations
 {
-    partial class AddForm
+    partial class Soderzhanie
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             SuspendLayout();
             // 
-            // AddForm
+            // Soderzhanie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 128, 255);
-            ClientSize = new Size(438, 450);
-            Name = "AddForm";
-            Text = "AddForm";
+            BackColor = Color.Blue;
+            ClientSize = new Size(461, 450);
+            Name = "Soderzhanie";
+            Text = "Soderzhanie";
             ResumeLayout(false);
         }
 

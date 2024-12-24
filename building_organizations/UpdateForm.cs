@@ -41,8 +41,8 @@ namespace building_organizations
                         label.Show();
                         this.Controls.Add(label);
                         TextBox textBox = new TextBox();
-                        //textBox.Text = defaults[i];
-                        textBox.Location = new System.Drawing.Point(150, 20 + i * 40);
+                        textBox.Text = "";
+                        textBox.Location = new System.Drawing.Point(200, 20 + i * 40);
                         textBox.Width = 200;
                         i++;
                         this.Controls.Add(textBox);
@@ -60,7 +60,7 @@ namespace building_organizations
             saveButton.Font = new Font("Impact", 14F);
             saveButton.Size = new Size(177, 81);
             saveButton.TabIndex = 2;
-            saveButton.Text = "Подтвердить";
+            saveButton.Text = "Сохранить";
             saveButton.UseVisualStyleBackColor = false;
             saveButton.Click += SaveButton_Click;
             this.Controls.Add(saveButton);
@@ -68,16 +68,25 @@ namespace building_organizations
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string[] data = { };
-            Array.Resize(ref data, textBoxesList.Count);
-            if (!int.TryParse(textBoxesList[0].Text, out int intResult))
-                throw new Exception($"Cannot convert '{textBoxesList[0].Text}' to integer. ID!!!");
-            for (int i = 0; i < textBoxesList.Count; i++)
-            {
-                string value = textBoxesList[i].Text;
-                data[i] = value;
+            try { 
+                string[] data = { };
+                Array.Resize(ref data, textBoxesList.Count);
+                if (!int.TryParse(textBoxesList[0].Text, out int intResult))
+                    throw new Exception($"Cannot convert '{textBoxesList[0].Text}' to integer. ID!!!");
+                for (int i = 0; i < textBoxesList.Count; i++)
+                {
+                    string value = textBoxesList[i].Text;
+                    data[i] = value;
+                }
+                databaseController.Update(tablename,data);
             }
-            databaseController.Update(tablename,data);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Неверный запрос:{ex.Message}");
+            }
+            finally {
+                MessageBox.Show($"Данные успешно сохранены!");
+            }
         }
     }
 }

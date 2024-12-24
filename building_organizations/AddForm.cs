@@ -26,7 +26,6 @@ namespace building_organizations
             string jsonContent = File.ReadAllText(jsonFilePath);
             dynamic tables = JsonConvert.DeserializeObject(jsonContent);
             this.Text = tablename;
-            //string[] defaults;
             int i = 0;
             foreach (var table in tables)
             {
@@ -42,9 +41,9 @@ namespace building_organizations
                         label.Show();
                         this.Controls.Add(label);
                         TextBox textBox = new TextBox();
-                        //textBox.Text = defaults[i];
-                        textBox.Location = new System.Drawing.Point(150, 20 + i * 40);
+                        textBox.Location = new System.Drawing.Point(200, 20 + i * 40);
                         textBox.Width = 200;
+                        textBox.Text = "";
                         i++;
                         this.Controls.Add(textBox);
                         textBoxesList.Add(textBox);
@@ -53,7 +52,7 @@ namespace building_organizations
             }
             Button saveButton = new Button
             {
-                Text = "Сохранить",
+                Text = "Добавить",
                 Location = new System.Drawing.Point(150, 20 + i * 40),
                 Width = 100
             };
@@ -61,7 +60,7 @@ namespace building_organizations
             saveButton.Font = new Font("Impact", 14F);
             saveButton.Size = new Size(177, 81);
             saveButton.TabIndex = 2;
-            saveButton.Text = "Подтвердить";
+            saveButton.Text = "Добавить";
             saveButton.UseVisualStyleBackColor = false;
             saveButton.Click += SaveButton_Click;
             this.Controls.Add(saveButton);
@@ -70,14 +69,24 @@ namespace building_organizations
         
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string[] data = { };
-            Array.Resize(ref data, textBoxesList.Count);
-            for (int i = 0; i < textBoxesList.Count; i++)
+            try
             {
-                string value = textBoxesList[i].Text;
-                data[i] = value;
+                string[] data = { };
+                Array.Resize(ref data, textBoxesList.Count);
+                for (int i = 0; i < textBoxesList.Count; i++)
+                {
+                    string value = textBoxesList[i].Text;
+                    data[i] = value;
+                }
+                databaseController.Add(data, tablename);
             }
-            databaseController.Add(data,tablename);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Неверный запрос:{ex.Message}");
+            }
+            finally {
+                MessageBox.Show($"Данные успешно сохранены!");
+            }
             
         }
 
