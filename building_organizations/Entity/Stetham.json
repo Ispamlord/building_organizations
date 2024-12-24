@@ -508,6 +508,86 @@
             }
 
         ]
+    },
+    {
+        "table_name": "workers_brigade",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+
+            {
+                "column_name": "worker_id",
+                "type": "integer",
+                "lname": "Рабочий",
+                "foreign_key": true,
+                "references": {
+                    "table": "workers",
+                    "type": "text",
+                    "replace_with": "last_name"
+                }
+            },
+            {
+                "column_name": "brigade_id",
+                "type": "integer",
+                "lname": "Название бригады",
+                "foreign_key": true,
+                "references": {
+                    "table": "brigade",
+                    "type": "text",
+                    "replace_with": "name"
+                }
+            }
+
+        ]
+    },
+    {
+        "table_name": "request",
+        "columns": [
+            {
+                "column_name": "id",
+                "type": "integer",
+                "lname": "ID",
+                "primary_key": true
+            },
+
+            {
+                "column_name": "material_id",
+                "type": "integer",
+                "lname": "Стройматериал",
+                "foreign_key": true,
+                "references": {
+                    "table": "building_materials",
+                    "type": "text",
+                    "replace_with": "name"
+                }
+            },
+            {
+                "column_name": "delivery_id",
+                "type": "integer",
+                "lname": "Дата Поставки",
+                "foreign_key": true,
+                "references": {
+                    "table": "delivery",
+                    "type": "date",
+                    "replace_with": "delivery_date"
+                }
+            },
+            {
+                "column_name": "request_date",
+                "type": "date",
+                "lname": "Дата заявки"
+            },
+            {
+                "column_name": "quantity",
+                "type": "integer",
+                "lname": "Количество"
+            }
+
+        ]
     }
 
 ]

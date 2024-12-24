@@ -12,6 +12,7 @@ using System.Threading.Tasks.Dataflow;
 using System.Windows.Forms;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace building_organizations.Entity
@@ -60,10 +61,20 @@ namespace building_organizations.Entity
                                 {
                                     string rtable = refer.table != null ? refer.table.ToString() : "";
                                     string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
-                                    int? id = FindIdByType(rtable, Replece, data);
-
+                                    string refertype = refer.type != null ? refer.type.ToString() : "";
+                                    object rr;
+                                    try
+                                    {
+                                        rr = ReturnType(refertype, data);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
+                                        return;
+                                    }
+                                    int? ids = FindIdByType(rtable, Replece, rr);
                                     where += $" {refer.table}.id = {a} ";
-                                    command.Parameters.AddWithValue(a, id);
+                                    command.Parameters.AddWithValue(a, ids);
                                 }
                             }
                             else
@@ -71,10 +82,20 @@ namespace building_organizations.Entity
                                 if (column.primary_key == null) sql += $"{table.table_name}.{column.column_name} AS \"{column.lname}\"";
                                 else sql += $"{table.table_name}.{column.column_name}";
                                 string s = column.lname.ToString();
+                                
                                 if (columna == s)
                                 {
                                     string columnType = column.type != null ? column.type.ToString() : "";
-                                    object r = ReturnType(columnType, data);
+                                    object r;
+                                    try
+                                    {
+                                        r = ReturnType(columnType, data);
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
+                                        return;
+                                    }
                                     if (columnType == "text")
                                     {
                                         string pattern = $"%{data}%";
@@ -107,7 +128,7 @@ namespace building_organizations.Entity
                         }
                         sql += where;
                         sql += ";";
-                        MessageBox.Show(sql);
+                        //MessageBox.Show(sql);
                     }
                 }
 
@@ -126,7 +147,6 @@ namespace building_organizations.Entity
                 command.Dispose(); 
             }
         }
-            
         public void Update(string tablename, string[] update)
         {
             NpgsqlCommand command = new NpgsqlCommand();
@@ -164,12 +184,19 @@ namespace building_organizations.Entity
                                 sql += $"SET {column.column_name} = {paramname} ";
                                 string rtable = refer.table != null ? refer.table.ToString() : "";
                                 string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
-                                int? ids = FindIdByType(rtable, Replece, update[i]);
-                                if (!ids.HasValue)
+                                string refertype = refer.type != null ? refer.type.ToString() : "";
+                                object rr;
+                                try
                                 {
-                                    MessageBox.Show("No ID found.");
+                                    rr = ReturnType(refertype, update[i]);
                                 }
-
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
+                                    return;
+                                }
+                                int? ids = FindIdByType(rtable, Replece, rr);
+                                
                                 command.Parameters.AddWithValue(paramname, ids);
                             }
                             else
@@ -177,7 +204,16 @@ namespace building_organizations.Entity
                                 string paramname = $"@param{i}";
                                 sql += $"SET {column.column_name} = {paramname}";
                                 string columnType = column.type != null ? column.type.ToString() : "";
-                                object r = ReturnType(columnType, update[i]);
+                                object r;
+                                try
+                                {
+                                    r = ReturnType(columnType, update[i]);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
+                                    return;
+                                }
                                 command.Parameters.AddWithValue(paramname, r);
                             }
                             if (column != lastcolum)
@@ -203,15 +239,22 @@ namespace building_organizations.Entity
             string sql = $"DELETE FROM {tablename} WHERE {column} = {data};";
         }
         public void Delete(string tablename, int id) {
-            NpgsqlCommand command = new NpgsqlCommand();
-            command.Connection = sqlConnection;
-            command.CommandType = CommandType.Text;
-            string sql = $"DELETE FROM {tablename} WHERE id = @id;";
-            
-            command.Parameters.AddWithValue("@id", id);
-            command.CommandText = sql;
-            command.ExecuteNonQuery();
-            command.Dispose();
+            try {
+                NpgsqlCommand command = new NpgsqlCommand();
+                command.Connection = sqlConnection;
+                command.CommandType = CommandType.Text;
+                string sql = $"DELETE FROM {tablename} WHERE id = @id;";
+
+                command.Parameters.AddWithValue("@id", id);
+                command.CommandText = sql;
+                command.ExecuteNonQuery();
+                command.Dispose();
+                MessageBox.Show("Данные удалены!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         //запись в таблицу
         public string[]? Select(string tablename,DataGridView d)
@@ -237,7 +280,7 @@ namespace building_organizations.Entity
                             if (column.references != null)
                             {
                                 var refer = column.references;
-                                sql += $"{refer.table}.{refer.replace_with} AS {column.lname}";
+                                sql += $"{refer.table}.{refer.replace_with} AS \"{column.lname}\"";
                             } else {
                                 if (column.primary_key == null) sql += $"{table.table_name}.{column.column_name} AS \"{column.lname}\"";
                                 else sql += $"{table.table_name}.{column.column_name}";
@@ -351,13 +394,12 @@ namespace building_organizations.Entity
                                 }
                                 string rtable = refer.table != null ? refer.table.ToString() : "";
                                 string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
-                                int? id = FindIdByType(rtable, Replece, data[i]);
-                                if (!id.HasValue)
-                                {
-                                    MessageBox.Show("No ID found.");
-                                }
+                                string refertype = refer.type != null ? refer.type.ToString() : "";
+                                object rr = ReturnType(refertype, data[i]);
+                                int? ids = FindIdByType(rtable, Replece, rr);
+                                
 
-                                command.Parameters.AddWithValue(paramname, id);
+                                command.Parameters.AddWithValue(paramname, ids);
                             }
                             else
                             {
@@ -409,6 +451,7 @@ namespace building_organizations.Entity
             }
             return null;
         }
+        
         //функция для свободных Select запросов
         public void QueryTool(string sql, DataGridView dataGridView)
         {

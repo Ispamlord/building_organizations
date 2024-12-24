@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система управления строительством</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            margin: 20px;
+        }
+
+        h2 {
+            color: #0073e6;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .table-summary {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #0073e6;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Система управления строительством</h1>
+    </header>
+
+    <section>
+        <h2>Справочники</h2>
+
+        <!-- Directory: City, Street, Bank, Supply, Work Type, Material Measurement, Specialization -->
+        <div class="table-summary">
+            <h3 class="section-title">Город</h3>
+            <p>Хранит информацию о городах.</p>
+            <ul>
+                <li>ID - идентификатор города, основной ключ.</li>
+                <li>city_name - название города.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Улица</h3>
+            <p>Хранит информацию об улицах.</p>
+            <ul>
+                <li>ID - идентификатор улицы, основной ключ.</li>
+                <li>street_name - название улицы.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Банк</h3>
+            <p>Хранит информацию о банках.</p>
+            <ul>
+                <li>ID - идентификатор банка, основной ключ.</li>
+                <li>name - название банка.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Поставка</h3>
+            <p>Хранит информацию о поставках.</p>
+            <ul>
+                <li>ID - идентификатор поставки, основной ключ.</li>
+                <li>supplier_id - внешний ключ, ссылается на таблицу поставщиков.</li>
+                <li>delivery_date - дата поставки.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Вид работы</h3>
+            <p>Хранит информацию о видах работ.</p>
+            <ul>
+                <li>ID - идентификатор типа работы, основной ключ.</li>
+                <li>name - название типа работы.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Измерение стройматериалов</h3>
+            <p>Хранит информацию о единицах измерения строительных материалов.</p>
+            <ul>
+                <li>ID - идентификатор единицы измерения, основной ключ.</li>
+                <li>name - название единицы измерения.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Специализация</h3>
+            <p>Хранит информацию о специализациях рабочих.</p>
+            <ul>
+                <li>ID - идентификатор специализации, основной ключ.</li>
+                <li>name - название специализации.</li>
+            </ul>
+        </div>
+
+        <h2>Материалы и сотрудники</h2>
+
+        <!-- Materials and Employees: Building Materials, Brigade, Workers -->
+        <div class="table-summary">
+            <h3 class="section-title">Стройматериалы</h3>
+            <p>Хранит информацию о строительных материалах.</p>
+            <ul>
+                <li>ID - идентификатор строительного материала, основной ключ.</li>
+                <li>name - название материала.</li>
+                <li>unit_id - внешний ключ, ссылается на таблицу единиц измерения.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Бригада</h3>
+            <p>Хранит информацию о бригадах.</p>
+            <ul>
+                <li>ID - идентификатор бригады, основной ключ.</li>
+                <li>name - название бригады.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Рабочие</h3>
+            <p>Хранит информацию о рабочих.</p>
+            <ul>
+                <li>ID - идентификатор рабочего, основной ключ.</li>
+                <li>last_name - фамилия.</li>
+                <li>first_name - имя.</li>
+                <li>middle_name - отчество.</li>
+            </ul>
+        </div>
+
+        <h2>Строительство</h2>
+
+        <!-- Construction: Object, Work on Object, Supplier, Order -->
+        <div class="table-summary">
+            <h3 class="section-title">Объект</h3>
+            <p>Хранит информацию о строительных объектах.</p>
+            <ul>
+                <li>ID - идентификатор объекта, основной ключ.</li>
+                <li>object_name - название объекта.</li>
+                <li>house_number - номер дома.</li>
+                <li>city_id - внешний ключ, ссылается на таблицу города.</li>
+                <li>street_id - внешний ключ, ссылается на таблицу улицы.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Работа на объекте</h3>
+            <p>Хранит информацию о работах на объекте.</p>
+            <ul>
+                <li>ID - идентификатор работы, основной ключ.</li>
+                <li>date_ - дата отчета.</li>
+                <li>value_work - количество выполненных работ.</li>
+                <li>work_type_id - внешний ключ, ссылается на таблицу типов работ.</li>
+                <li>object_id - внешний ключ, ссылается на таблицу объектов.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Поставщик</h3>
+            <p>Хранит информацию о поставщиках.</p>
+            <ul>
+                <li>ID - идентификатор поставщика, основной ключ.</li>
+                <li>last_name - фамилия.</li>
+                <li>first_name - имя.</li>
+                <li>middle_name - отчество.</li>
+                <li>account_number - номер аккаунта.</li>
+                <li>inn - ИНН.</li>
+                <li>bank_id - внешний ключ, ссылается на таблицу банков.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Заявка</h3>
+            <p>Хранит информацию о заявках.</p>
+            <ul>
+                <li>ID - идентификатор заявки, основной ключ.</li>
+                <li>date_ - дата заявки.</li>
+                <li>material_id - внешний ключ, ссылается на таблицу материалов.</li>
+                <li>quantity - количество материала.</li>
+                <li>supplier_id - внешний ключ, ссылается на таблицу поставщиков.</li>
+            </ul>
+        </div>
+
+        <h2>Пром Таблицы</h2>
+
+        <!-- Promotional Tables: Brigade on Object, Specialization and Workers, Supply Supplier, Material and Object, Brigade Workers -->
+        <div class="table-summary">
+            <h3 class="section-title">Бригада и объект</h3>
+            <p>Хранит информацию о связи бригад и объектов.</p>
+            <ul>
+                <li>ID - идентификатор, основной ключ.</li>
+                <li>object_id - внешний ключ, ссылается на таблицу объектов.</li>
+                <li>brigade_id - внешний ключ, ссылается на таблицу бригад.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Специализация и рабочие</h3>
+            <p>Хранит информацию о связи специализаций и рабочих.</p>
+            <ul>
+                <li>ID - идентификатор, основной ключ.</li>
+                <li>specialization_id - внешний ключ, ссылается на таблицу специализаций.</li>
+                <li>worker_id - внешний ключ, ссылается на таблицу рабочих.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Поставка и поставщик</h3>
+            <p>Хранит информацию о связи поставок и поставщиков.</p>
+            <ul>
+                <li>ID - идентификатор, основной ключ.</li>
+                <li>supplier_id - внешний ключ, ссылается на таблицу поставщиков.</li>
+                <li>delivery_id - внешний ключ, ссылается на таблицу поставок.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Материалы и объект</h3>
+            <p>Хранит информацию о связи материалов и объектов.</p>
+            <ul>
+                <li>ID - идентификатор, основной ключ.</li>
+                <li>material_id - внешний ключ, ссылается на таблицу материалов.</li>
+                <li>object_id - внешний ключ, ссылается на таблицу объектов.</li>
+            </ul>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Бригада и рабочие</h3>
+            <p>Хранит информацию о связи бригад и рабочих.</p>
+            <ul>
+                <li>ID - идентификатор, основной ключ.</li>
+                <li>worker_id - внешний ключ, ссылается на таблицу рабочих.</li>
+                <li>brigade_id - внешний ключ, ссылается на таблицу бригад.</li>
+            </ul>
+        </div>
+
+        <h2>Разное</h2>
+
+        <!-- Miscellaneous: Logout, Change Password -->
+        <div class="table-summary">
+            <h3 class="section-title">Выйти</h3>
+            <p>Выход из системы.</p>
+        </div>
+
+        <div class="table-summary">
+            <h3 class="section-title">Сменить пароль</h3>
+            <p>Форма для смены пароля.</p>
+        </div>
+
+        <h2>Документ</h2>
+        <!-- Query Tool -->
+        <div class="table-summary">
+            <h3 class="section-title">Query Tool</h3>
+            <p>При нажатии открывается окно, в котором можно писать SQL-запросы.</p>
+        </div>
+    </section>
+</body>
+</html>

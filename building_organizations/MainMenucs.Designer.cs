@@ -32,19 +32,21 @@
             разноеToolStripMenuItem = new ToolStripMenuItem();
             changeRoleToolStripMenuItem = new ToolStripMenuItem();
             changeToolStripMenuItem = new ToolStripMenuItem();
+            материалыИПоставкиToolStripMenuItem = new ToolStripMenuItem();
+            материалыToolStripMenuItem = new ToolStripMenuItem();
+            бригадаToolStripMenuItem = new ToolStripMenuItem();
+            рабочиеToolStripMenuItem = new ToolStripMenuItem();
             ObjectToolStripMenuItem = new ToolStripMenuItem();
-            Supplyer = new ToolStripMenuItem();
-            Bulding_materials = new ToolStripMenuItem();
-            workers = new ToolStripMenuItem();
-            toolStripMenuItem1 = new ToolStripMenuItem();
             объектToolStripMenuItem = new ToolStripMenuItem();
             работаНаОбъектеToolStripMenuItem = new ToolStripMenuItem();
+            поставщикToolStripMenuItem1 = new ToolStripMenuItem();
+            заявкаToolStripMenuItem1 = new ToolStripMenuItem();
             tablepromToolStripMenuItem = new ToolStripMenuItem();
             бригадаИОбъектToolStripMenuItem = new ToolStripMenuItem();
             специализацияИРабочиеToolStripMenuItem = new ToolStripMenuItem();
-            бригадаИОбъектToolStripMenuItem1 = new ToolStripMenuItem();
             поставкаПоставщикToolStripMenuItem = new ToolStripMenuItem();
             материалыИОбъектToolStripMenuItem = new ToolStripMenuItem();
+            бригадРабочиеToolStripMenuItem = new ToolStripMenuItem();
             DocumentToolStripMenuItem = new ToolStripMenuItem();
             SpravochnicToolStripMenuItem = new ToolStripMenuItem();
             City = new ToolStripMenuItem();
@@ -73,7 +75,7 @@
             menuStrip1.BackColor = Color.FromArgb(128, 128, 255);
             menuStrip1.Font = new Font("Impact", 10F);
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { разноеToolStripMenuItem, ObjectToolStripMenuItem, tablepromToolStripMenuItem, DocumentToolStripMenuItem, SpravochnicToolStripMenuItem, справкаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { разноеToolStripMenuItem, материалыИПоставкиToolStripMenuItem, ObjectToolStripMenuItem, tablepromToolStripMenuItem, DocumentToolStripMenuItem, SpravochnicToolStripMenuItem, справкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1006, 29);
@@ -102,41 +104,42 @@
             changeToolStripMenuItem.Text = "Сменить пароль";
             changeToolStripMenuItem.Click += сменитьПарольToolStripMenuItem_Click;
             // 
+            // материалыИПоставкиToolStripMenuItem
+            // 
+            материалыИПоставкиToolStripMenuItem.BackColor = Color.FromArgb(192, 192, 255);
+            материалыИПоставкиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { материалыToolStripMenuItem, бригадаToolStripMenuItem, рабочиеToolStripMenuItem });
+            материалыИПоставкиToolStripMenuItem.Name = "материалыИПоставкиToolStripMenuItem";
+            материалыИПоставкиToolStripMenuItem.Size = new Size(218, 25);
+            материалыИПоставкиToolStripMenuItem.Text = "Материалы и сотрудники";
+            // 
+            // материалыToolStripMenuItem
+            // 
+            материалыToolStripMenuItem.Name = "материалыToolStripMenuItem";
+            материалыToolStripMenuItem.Size = new Size(226, 26);
+            материалыToolStripMenuItem.Text = "Стройматериалы";
+            материалыToolStripMenuItem.Click += Bulding_materials_Click_1;
+            // 
+            // бригадаToolStripMenuItem
+            // 
+            бригадаToolStripMenuItem.Name = "бригадаToolStripMenuItem";
+            бригадаToolStripMenuItem.Size = new Size(226, 26);
+            бригадаToolStripMenuItem.Text = "Бригада";
+            бригадаToolStripMenuItem.Click += brigade_Click;
+            // 
+            // рабочиеToolStripMenuItem
+            // 
+            рабочиеToolStripMenuItem.Name = "рабочиеToolStripMenuItem";
+            рабочиеToolStripMenuItem.Size = new Size(226, 26);
+            рабочиеToolStripMenuItem.Text = "Рабочие";
+            рабочиеToolStripMenuItem.Click += workers_Click;
+            // 
             // ObjectToolStripMenuItem
             // 
             ObjectToolStripMenuItem.BackColor = Color.FromArgb(192, 192, 255);
-            ObjectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Supplyer, Bulding_materials, workers, toolStripMenuItem1, объектToolStripMenuItem, работаНаОбъектеToolStripMenuItem });
+            ObjectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { объектToolStripMenuItem, работаНаОбъектеToolStripMenuItem, поставщикToolStripMenuItem1, заявкаToolStripMenuItem1 });
             ObjectToolStripMenuItem.Name = "ObjectToolStripMenuItem";
             ObjectToolStripMenuItem.Size = new Size(136, 25);
             ObjectToolStripMenuItem.Text = "Строительство";
-            // 
-            // Supplyer
-            // 
-            Supplyer.Name = "Supplyer";
-            Supplyer.Size = new Size(232, 26);
-            Supplyer.Text = "Поставщик";
-            Supplyer.Click += Supplyer_Click;
-            // 
-            // Bulding_materials
-            // 
-            Bulding_materials.Name = "Bulding_materials";
-            Bulding_materials.Size = new Size(232, 26);
-            Bulding_materials.Text = "Стройматериалы";
-            Bulding_materials.Click += Bulding_materials_Click_1;
-            // 
-            // workers
-            // 
-            workers.Name = "workers";
-            workers.Size = new Size(232, 26);
-            workers.Text = "Рабочие";
-            workers.Click += workers_Click;
-            // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(232, 26);
-            toolStripMenuItem1.Text = "Бригада";
-            toolStripMenuItem1.Click += brigade_Click;
             // 
             // объектToolStripMenuItem
             // 
@@ -152,10 +155,24 @@
             работаНаОбъектеToolStripMenuItem.Text = "Работа на объекте";
             работаНаОбъектеToolStripMenuItem.Click += работаНаОбъектеToolStripMenuItem_Click;
             // 
+            // поставщикToolStripMenuItem1
+            // 
+            поставщикToolStripMenuItem1.Name = "поставщикToolStripMenuItem1";
+            поставщикToolStripMenuItem1.Size = new Size(232, 26);
+            поставщикToolStripMenuItem1.Text = "Поставщик";
+            поставщикToolStripMenuItem1.Click += Supplyer_Click;
+            // 
+            // заявкаToolStripMenuItem1
+            // 
+            заявкаToolStripMenuItem1.Name = "заявкаToolStripMenuItem1";
+            заявкаToolStripMenuItem1.Size = new Size(232, 26);
+            заявкаToolStripMenuItem1.Text = "Заявка";
+            заявкаToolStripMenuItem1.Click += RequestToolStripMenuItem1_Click;
+            // 
             // tablepromToolStripMenuItem
             // 
             tablepromToolStripMenuItem.BackColor = Color.FromArgb(192, 192, 255);
-            tablepromToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { бригадаИОбъектToolStripMenuItem, специализацияИРабочиеToolStripMenuItem, бригадаИОбъектToolStripMenuItem1, поставкаПоставщикToolStripMenuItem, материалыИОбъектToolStripMenuItem });
+            tablepromToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { бригадаИОбъектToolStripMenuItem, специализацияИРабочиеToolStripMenuItem, поставкаПоставщикToolStripMenuItem, материалыИОбъектToolStripMenuItem, бригадРабочиеToolStripMenuItem });
             tablepromToolStripMenuItem.Name = "tablepromToolStripMenuItem";
             tablepromToolStripMenuItem.Size = new Size(129, 25);
             tablepromToolStripMenuItem.Text = "Пром таблица";
@@ -166,30 +183,35 @@
             бригадаИОбъектToolStripMenuItem.Name = "бригадаИОбъектToolStripMenuItem";
             бригадаИОбъектToolStripMenuItem.Size = new Size(295, 26);
             бригадаИОбъектToolStripMenuItem.Text = "Бригада и объект";
+            бригадаИОбъектToolStripMenuItem.Click += бригадаИОбъектToolStripMenuItem_Click;
             // 
             // специализацияИРабочиеToolStripMenuItem
             // 
             специализацияИРабочиеToolStripMenuItem.Name = "специализацияИРабочиеToolStripMenuItem";
             специализацияИРабочиеToolStripMenuItem.Size = new Size(295, 26);
             специализацияИРабочиеToolStripMenuItem.Text = "Специализация и рабочие";
-            // 
-            // бригадаИОбъектToolStripMenuItem1
-            // 
-            бригадаИОбъектToolStripMenuItem1.Name = "бригадаИОбъектToolStripMenuItem1";
-            бригадаИОбъектToolStripMenuItem1.Size = new Size(295, 26);
-            бригадаИОбъектToolStripMenuItem1.Text = "Бригада и объект";
+            специализацияИРабочиеToolStripMenuItem.Click += специализацияИРабочиеToolStripMenuItem_Click;
             // 
             // поставкаПоставщикToolStripMenuItem
             // 
             поставкаПоставщикToolStripMenuItem.Name = "поставкаПоставщикToolStripMenuItem";
             поставкаПоставщикToolStripMenuItem.Size = new Size(295, 26);
             поставкаПоставщикToolStripMenuItem.Text = "Поставка поставщик";
+            поставкаПоставщикToolStripMenuItem.Click += поставкаПоставщикToolStripMenuItem_Click;
             // 
             // материалыИОбъектToolStripMenuItem
             // 
             материалыИОбъектToolStripMenuItem.Name = "материалыИОбъектToolStripMenuItem";
             материалыИОбъектToolStripMenuItem.Size = new Size(295, 26);
             материалыИОбъектToolStripMenuItem.Text = "материалы и объект";
+            материалыИОбъектToolStripMenuItem.Click += материалыИОбъектToolStripMenuItem_Click;
+            // 
+            // бригадРабочиеToolStripMenuItem
+            // 
+            бригадРабочиеToolStripMenuItem.Name = "бригадРабочиеToolStripMenuItem";
+            бригадРабочиеToolStripMenuItem.Size = new Size(295, 26);
+            бригадРабочиеToolStripMenuItem.Text = "Бригад рабочие";
+            бригадРабочиеToolStripMenuItem.Click += бригадРабочиеToolStripMenuItem_Click;
             // 
             // DocumentToolStripMenuItem
             // 
@@ -267,14 +289,14 @@
             // AProgrammToolStripMenuItem
             // 
             AProgrammToolStripMenuItem.Name = "AProgrammToolStripMenuItem";
-            AProgrammToolStripMenuItem.Size = new Size(224, 26);
+            AProgrammToolStripMenuItem.Size = new Size(191, 26);
             AProgrammToolStripMenuItem.Text = "О программе";
             AProgrammToolStripMenuItem.Click += AProgrammToolStripMenuItem_Click;
             // 
             // SoderzhanieToolStripMenuItem
             // 
             SoderzhanieToolStripMenuItem.Name = "SoderzhanieToolStripMenuItem";
-            SoderzhanieToolStripMenuItem.Size = new Size(224, 26);
+            SoderzhanieToolStripMenuItem.Size = new Size(191, 26);
             SoderzhanieToolStripMenuItem.Text = "Содержание";
             SoderzhanieToolStripMenuItem.Click += SoderzhanieToolStripMenuItem_Click;
             // 
@@ -405,17 +427,19 @@
         private Button button4;
         private TextBox textBox1;
         private ComboBox comboBox1;
-        private ToolStripMenuItem Supplyer;
-        private ToolStripMenuItem Bulding_materials;
-        private ToolStripMenuItem workers;
-        private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem объектToolStripMenuItem;
         private ToolStripMenuItem tablepromToolStripMenuItem;
         private ToolStripMenuItem работаНаОбъектеToolStripMenuItem;
         private ToolStripMenuItem бригадаИОбъектToolStripMenuItem;
         private ToolStripMenuItem специализацияИРабочиеToolStripMenuItem;
-        private ToolStripMenuItem бригадаИОбъектToolStripMenuItem1;
         private ToolStripMenuItem поставкаПоставщикToolStripMenuItem;
         private ToolStripMenuItem материалыИОбъектToolStripMenuItem;
+        private ToolStripMenuItem бригадРабочиеToolStripMenuItem;
+        private ToolStripMenuItem материалыИПоставкиToolStripMenuItem;
+        private ToolStripMenuItem материалыToolStripMenuItem;
+        private ToolStripMenuItem поставщикToolStripMenuItem1;
+        private ToolStripMenuItem бригадаToolStripMenuItem;
+        private ToolStripMenuItem рабочиеToolStripMenuItem;
+        private ToolStripMenuItem заявкаToolStripMenuItem1;
     }
 }
