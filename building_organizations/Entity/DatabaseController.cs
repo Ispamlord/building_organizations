@@ -153,12 +153,17 @@ namespace building_organizations.Entity
             command.Connection = sqlConnection;
             command.CommandType = CommandType.Text;
             dynamic tables = JsonConvert.DeserializeObject(jsonContent);
-            string sql = $"UPDATE {tablename} ";
+            string sql = $"UPDATE {tablename} SET ";
             int i = 0;
             string idparam = "@idparam";
             string Where =$" WHERE id = {idparam};";
             command.Parameters.AddWithValue(idparam, Convert.ToInt32(update[i]));
             i++;
+            int k = 0;
+            for (int j = 0; j < update.Length; j++)
+            {
+                k++;
+            }
             try {
                 foreach(var table in tables)
                 {
@@ -181,7 +186,7 @@ namespace building_organizations.Entity
                             {
                                 var refer = column.references;
                                 string paramname = $"@param{i}";
-                                sql += $"SET {column.column_name} = {paramname} ";
+                                sql += $"{column.column_name} = {paramname} ";
                                 string rtable = refer.table != null ? refer.table.ToString() : "";
                                 string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
                                 string refertype = refer.type != null ? refer.type.ToString() : "";
@@ -202,7 +207,7 @@ namespace building_organizations.Entity
                             else
                             {
                                 string paramname = $"@param{i}";
-                                sql += $"SET {column.column_name} = {paramname}";
+                                sql += $"{column.column_name} = {paramname} ";
                                 string columnType = column.type != null ? column.type.ToString() : "";
                                 object r;
                                 try
@@ -216,9 +221,10 @@ namespace building_organizations.Entity
                                 }
                                 command.Parameters.AddWithValue(paramname, r);
                             }
-                            if (column != lastcolum)
+                            if (column != lastcolum && k!=2)
                             {
                                 sql += ", ";
+                                k--;
                             }
                             i++;
                         }   
