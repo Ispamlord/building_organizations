@@ -63,18 +63,28 @@ namespace building_organizations.Entity
                                     string Replece = refer.replace_with != null ? refer.replace_with.ToString() : "";
                                     string refertype = refer.type != null ? refer.type.ToString() : "";
                                     object rr;
-                                    try
+                                    if(refertype == "text")
                                     {
-                                        rr = ReturnType(refertype, data);
+                                        string pattern = $"%{data}%";
+                                        command.Parameters.AddWithValue(a, pattern);
+                                        where += $" {refer.table}.{Replece} LIKE {a} ";
                                     }
-                                    catch (Exception ex)
+                                    else
                                     {
-                                        MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
-                                        return;
+                                       
+                                        try
+                                        {
+                                            rr = ReturnType(refertype, data);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show($"Ошибка приведения к типу: {ex.Message}");
+                                            return;
+                                        }
+                                        int? ids = FindIdByType(rtable, Replece, rr);
+                                        where += $" {refer.table}.id = {a} ";
+                                        command.Parameters.AddWithValue(a, ids);
                                     }
-                                    int? ids = FindIdByType(rtable, Replece, rr);
-                                    where += $" {refer.table}.id = {a} ";
-                                    command.Parameters.AddWithValue(a, ids);
                                 }
                             }
                             else
@@ -457,6 +467,7 @@ namespace building_organizations.Entity
             }
             return null;
         }
+
         
         //функция для свободных Select запросов
         public void QueryTool(string sql, DataGridView dataGridView)
